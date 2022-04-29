@@ -13,15 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('city_mangers', function (Blueprint $table) {
-            $table->id();
-           // $table->string('name');
-           // $table->string('email');
-            $table->string('national_id');
-           // $table->string('passwd');
-            $table->string('city_name');
-
-           
+        Schema::table('city_mangers', function (Blueprint $table) {
+            $table->foreignId("user_id")->references("id")->on("users");
         });
     }
 
@@ -32,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('city_mangers');
+        Schema::table('city_mangers', function (Blueprint $table) {
+            //
+        });
     }
 };
