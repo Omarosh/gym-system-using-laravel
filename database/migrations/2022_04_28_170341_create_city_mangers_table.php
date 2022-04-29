@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('national_id');
            // $table->string('passwd');
             $table->string('city_name');
-
+            $table->timestamps();
            
         });
     }

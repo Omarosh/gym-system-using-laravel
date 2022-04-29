@@ -12,13 +12,12 @@ use Illuminate\Http\Request;
 class CityMangerController extends Controller
 {
     function store(Request $request){
-        $request_out=$request->all();
-        dd( $request_out['name']);
+        
         $request_out=$request->all();
         $user=User::create([
             'name'=> $request_out['name'],
             'email'=> $request_out['email'],
-            'password' => $request_out['passwd']
+            'password' => $request_out['password']
         ])->id;
         $CityManger=CityManger::create([
             'user_id'=>$user,
