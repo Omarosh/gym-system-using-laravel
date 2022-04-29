@@ -9,7 +9,7 @@ class CityManger extends Model
 {
     use HasFactory;
     protected $fillable = [
-        
+        'user_id',
         'city_name',
         'national_id',
         

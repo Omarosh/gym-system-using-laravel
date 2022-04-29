@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CityMangerController;
 use Illuminate\Support\Facades\Route;
 use App\Models\CityManger;
 use App\Models\GymManger;
@@ -23,9 +24,7 @@ use App\Models\User;
 |
 */
 
-Route::get('/', function () {
-   $coach= Coach::find(1);
-
-   //$GYM->gymManger->name;
-    dd( $coach->gym->city_name);
-});
+Route::get('/citymanager', [CityMangerController::class,'store'])->name("citymanger.store");
+// Route::get('/citymanager',function(){
+//     return "lol";
+// });
