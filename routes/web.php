@@ -1,6 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\CityManger;
+use App\Models\GymManger;
+use App\Models\Gym;
+use App\Models\Coach;
+
+
+
+use App\Models\User;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +24,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+   $coach= Coach::find(1);
+
+   //$GYM->gymManger->name;
+    dd( $coach->gym->city_name);
 });
