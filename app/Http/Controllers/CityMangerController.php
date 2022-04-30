@@ -18,7 +18,7 @@ class CityMangerController extends Controller
             'name'=> $request_out['name'],
             'email'=> $request_out['email'],
             'password' => $request_out['password']
-            
+            //dddd
         ])->id;
         $CityManger=CityManger::create([
             'user_id'=>$user,
