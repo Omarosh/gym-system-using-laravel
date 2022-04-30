@@ -14,6 +14,7 @@ class CityMangerController extends Controller
     public function store(Request $request){
         
         $request_out=$request->all();
+        
         $user=User::create([
             'name'=> $request_out['name'],
             'email'=> $request_out['email'],
@@ -28,7 +29,6 @@ class CityMangerController extends Controller
         ]);
         return $CityManger;
     }
-
 
     public function update(Request $request){
         

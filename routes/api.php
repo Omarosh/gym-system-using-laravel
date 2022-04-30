@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CityMangerController;
+use App\Http\Controllers\GymController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 //Route::post('/citymanager', [CityMangerController::class,'store'])->name("citymanger.store");
-Route::post('/', [CityMangerController::class,'delete'])->name("citymanger.store");
+Route::post('/', [GymController::class,'update'])->name("citymanger.store");
