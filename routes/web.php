@@ -29,3 +29,7 @@ Route::get('/', function () {
    //$GYM->gymManger->name;
     dd( $coach->gym->city_name);
 });
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
