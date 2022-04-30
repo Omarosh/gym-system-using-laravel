@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CityMangerController;
 use App\Http\Controllers\CoachController;
 use App\Http\Controllers\GymManagerController;
+use App\Http\Controllers\GymController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +33,5 @@ Route::get('/coaches/{coach}',[CoachController::class,'show']);
 Route::post('/coaches',[CoachController::class,'store']);
 Route::post('/coaches/{coach}',[CoachController::class,'update']);
 Route::delete('/coaches/{coach}',[CoachController::class,'destroy']);
+//Route::post('/citymanager', [CityMangerController::class,'store'])->name("citymanger.store");
+Route::post('/', [GymController::class,'update'])->name("citymanger.store");

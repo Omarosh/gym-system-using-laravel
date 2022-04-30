@@ -23,10 +23,7 @@ use App\Models\User;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    // return 'hello wolrd';
-    return view('welcome');
-});
+//Route::get('/', [CityMangerController::class,'update'])->name("citymanger.store");
 //Route::post('/citymanager', [CityMangerController::class,'store'])->name("citymanger.store");
 // Route::post('/citymanager',function(){
 //     return "lol";
