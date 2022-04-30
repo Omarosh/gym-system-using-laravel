@@ -18,4 +18,5 @@ use App\Http\Controllers\CityMangerController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('/citymanager', [CityMangerController::class,'store'])->name("citymanger.store");
+//Route::post('/citymanager', [CityMangerController::class,'store'])->name("citymanger.store");
+Route::post('/', [CityMangerController::class,'delete'])->name("citymanger.store");
