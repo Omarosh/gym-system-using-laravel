@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CityMangerController;
+use App\Http\Controllers\GymController;
 use Illuminate\Support\Facades\Route;
 use App\Models\CityManger;
 use App\Models\GymManger;
@@ -28,3 +30,7 @@ use App\Models\User;
 // Route::post('/citymanager',function(){
 //     return "lol";
 // });
+
+Route::get('/attendance',[AttendanceController::class,'index'])->name('attendance.index');
+Route::get('/attendance',[AttendanceController::class,'showView'])->name('attendance.show');
+

@@ -13,7 +13,6 @@ class Gym extends Model
         'cover_image_path',
         'city_name',
         'city_manger_id',
-        
     ];
 
     public function cityManger()
