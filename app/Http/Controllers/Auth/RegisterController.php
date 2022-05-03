@@ -8,6 +8,10 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RegisterController extends Controller
 {
@@ -64,10 +68,33 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        // Role::create(['name' => 'gym manager']) ;
+
+        // return User::create([
+        //     'name' => $data['name'],
+        //     'email' => $data['email'],
+        //     'password' => Hash::make($data['password']),
+        // ]);
+
+        $user =  User::create([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'password' => Hash::make($data['password']),
+                ]);
+
+        $form_role = $data['roles'] ;
+        $role_id = DB::table('roles')->where('name', $form_role)->value('id');
+        $user->roles()->sync($role_id) ;
+
+        return  $user ;
+
+         
+
+        // return redirect('/login');
+        // dd($role_id) ;
+        
+        // $roles = $user->getRoleNames() ;
+
+        // dd($roles) ;
     }
 }

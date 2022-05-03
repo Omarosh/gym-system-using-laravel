@@ -25,4 +25,8 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function show_gym_managers()
+    {
+        return view('city_manager.view');
+    }
 }
