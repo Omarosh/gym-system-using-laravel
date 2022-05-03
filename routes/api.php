@@ -36,5 +36,7 @@ use App\Http\Controllers\GymController;
 // //Route::post('/citymanager', [CityMangerController::class,'store'])->name("citymanger.store");
 // Route::post('/', [GymController::class,'update'])->name("citymanger.store");
 
+Route::put('/gym/{id}', [GymController::class,'update'])->name("gym.update");
+Route::delete('/gym/{id}', [GymController::class,'delete'])->name("gym.delete");
 Route::get('/gym',[GymController::class,'gymDatatables'])->name('api.gyms.index');
 Route::get('gyms',[GymController::class,'showDatatables']);

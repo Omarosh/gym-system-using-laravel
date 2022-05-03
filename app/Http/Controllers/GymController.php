@@ -84,6 +84,9 @@ class GymController extends Controller
             {
                 return $gym->city_name;
             })
+            ->addColumn('action', function($row){
+                return view('datatables.actions.action', compact('row'))->render();
+            })
             ->make(true);
     }
 

@@ -21,6 +21,7 @@
                <th>Created at</th>
                <th>cover_image</th>
                <th>City Manager Name</th>
+               <th>Actions</th>
             </tr>
          </thead>
          <tbody>
@@ -44,6 +45,11 @@
                },
                {
                   "data": "cityManager","name":"cityManager.city_name"
+               },
+               {  "data" :'action',
+                  "name" : 'action',
+                  'searchable':true,
+                  'orderable': true,
                }
             ]
          });
