@@ -48,11 +48,11 @@ Route::post('/city_manager/delete', [CityManagerController::class, 'destroy'])->
 Route::get('/trainees', [App\Http\Controllers\TraineeController::class, 'index'])->name('trainees');
 Route::get('/trainees/list', [App\Http\Controllers\TraineeController::class, 'getTrainees'])->name('trainees.list');
 Route::get('/trainees/{trainee}', [App\Http\Controllers\TraineeController::class, 'edit'])->name('trainee.edit');
-Route::delete('/trainees/{trainee}', [App\Http\Controllers\TraineeController::class, 'destroy'])->name('trainee.delete');
+Route::post('/trainees/delete', [App\Http\Controllers\TraineeController::class, 'destroy'])->name('trainee.delete');
 
 Route::get('/training_packages', [App\Http\Controllers\TrainingPackagesController::class, 'index'])->name('trainingPackages');
 Route::get('/training_packages/list', [App\Http\Controllers\TrainingPackagesController::class, 'getTrainingPackages'])->name('trainingPackages.list');
 Route::get('/training_packages/{training_package}', [App\Http\Controllers\TrainingPackagesController::class, 'edit'])->name('trainingPackages.edit');
-Route::delete('/training_packages/{training_package}', [App\Http\Controllers\TrainingPackagesController::class, 'destroy'])->name('trainingPackages.delete');
+Route::post('/training_packages/delete', [App\Http\Controllers\TrainingPackagesController::class, 'destroy'])->name('trainingPackages.delete');
 
 Auth::routes();
