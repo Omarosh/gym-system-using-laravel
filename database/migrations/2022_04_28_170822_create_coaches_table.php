@@ -17,9 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId("gym_id")->references("id")->on("gyms");
-            $table->foreignId("gym_manger_id")->references("id")->on("gym_mangers");
-            
-
+            $table->timestamps();
             
         });
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CityMangerController;
 use Illuminate\Support\Facades\Route;
 use App\Models\CityManger;
 use App\Models\GymManger;

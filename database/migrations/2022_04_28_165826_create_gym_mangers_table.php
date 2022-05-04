@@ -18,9 +18,9 @@ return new class extends Migration
            // $table->string('name');
           //  $table->string('email');
             $table->string('city_name');
-           // $table->string('national_id');
-            $table->string('passwd');
-   
+            // $table->string('passwd');s
+            $table->timestamps();
+
 
 
 

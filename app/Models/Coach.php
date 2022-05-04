@@ -12,7 +12,7 @@ class Coach extends Model
         
         'name',
         'gym_id',
-        "gym_manger_id",
+       
         
         
     ];
@@ -21,8 +21,5 @@ class Coach extends Model
         return $this->belongsTo(Gym::class);
     }
     
-    public function gymManger()
-    {
-        return $this->belongsTo(GymManger::class);
-    }
+   
 }
