@@ -42,9 +42,8 @@ class TraineeController extends Controller
         ]);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $request_out=$request->all();
         Trainee::where('id', $id)->delete();
         return back();
     }
