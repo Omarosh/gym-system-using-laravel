@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Attended_sessionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CityMangerController;
@@ -7,7 +8,10 @@ use App\Http\Controllers\CoachController;
 use App\Http\Controllers\GymManagerController;
 use App\Http\Controllers\GymController;
 use App\Http\Controllers\TraineeController;
+use App\Http\Controllers\TrainingPackageController;
+use App\Http\Controllers\TrainingSessionController;
 use App\Models\Trainee;
+use App\Models\Trainingpackege;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -66,3 +70,18 @@ Route::post('/sanctum/token', function (Request $request) {
     return $user->createToken($request->device_name)->plainTextToken;
 });
 Auth::routes(['verify' => true]);
+
+
+Route::post('/training_packages',[TrainingPackageController::class,'store']);
+Route::get('/trainees/{trainee}',[TraineeController::class,'show']);
+Route::post('/training_sessions',[TrainingSessionController::class,'store']);
+Route::get('/training_sessions/{training_session}',[TrainingSessionController::class,'show']);
+Route::post('training_sessions/{training_session}',[TrainingSessionController::class,'update']);
+Route::get('training_sessions',[TrainingSessionController::class,'index']);
+Route::delete('training_sessions/{training_session}',[TrainingSessionController::class,'destroy']);
+Route::post('/attended_sessions',[Attended_sessionController::class,'store']);
+Route::get('/attended_sessions',[Attended_sessionController::class,'index']);
+Route::post('/attended_sessions/{attended_session}',[Attended_sessionController::class,'update']);
+Route::delete('/attended_sessions/{attended_session}',[Attended_sessionController::class,'destroy']);
+Route::get('/attended_sessions/{attended_session}',[Attended_sessionController::class,'show']);
+Route::get('/trainees/{trainee}/sessions',[TraineeController::class,'show_trainee_sessions']);
