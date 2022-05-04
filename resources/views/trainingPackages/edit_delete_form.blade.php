@@ -4,13 +4,13 @@
         <button type='submit' class='btn btn-info' style="margin-left: 10px;">Edit</button>
     </form>
 
-    <button class='deletebutton btn btn-danger'>Delete</button>
+    <button class='deletebutton{{$row->id}} btn btn-danger'>Delete</button>
 </div>
 
 <script>
    
     $(()=>{
-    $("body").on("click",".deletebutton",function(){
+    $("body").on("click",".deletebutton{{$row->id}}",function(){
         if( confirm('are you sure')){
             deleteCityManger($(this))
         }
