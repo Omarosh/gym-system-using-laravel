@@ -29,8 +29,8 @@
        console.log(id);
         $.ajax({
     type: "POST",
-    url: '/trainee/delete',
-    data: { user_id: id, _token: '{{csrf_token()}}' },
+    url: '/trainees/delete',
+    data: { id: id, _token: '{{csrf_token()}}' },
     success: function (data) {
        console.log(data);
     },

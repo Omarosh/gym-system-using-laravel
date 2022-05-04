@@ -26,7 +26,7 @@
         $.ajax({
     type: "POST",
     url: '/training_packages/delete',
-    data: { user_id: id, _token: '{{csrf_token()}}' },
+    data: { id: id, _token: '{{csrf_token()}}' },
     success: function (data) {
        console.log(data);
     },

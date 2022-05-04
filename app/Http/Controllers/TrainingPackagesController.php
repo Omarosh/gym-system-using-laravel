@@ -36,9 +36,10 @@ class TrainingPackagesController extends Controller
         ]);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        TrainingPackage::where('id', $id)->delete();
+        $request_out=$request->all();
+        TrainingPackage::where("id",$request_out['id'] )->delete();
         return back();
     }
 
