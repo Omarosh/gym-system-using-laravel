@@ -57,11 +57,15 @@ class CityManagerController extends Controller
         return view('city_manager.view');
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy( Request $request)
     {
+        
         $request_out=$request->all();
-        CityManger::where("user_id", $id)->delete();
-        User::where('id', $id)->delete();
+        $citymanager=CityManger::where("id",$request_out['user_id'] )->first();
+
+        CityManger::where("id",$request_out['user_id'] )->delete();
+
+        User::where('id',$citymanager['user_id'] )->delete();
         return back();
     }
 
