@@ -12,13 +12,13 @@
     $(()=>{
     $("body").on("click",".deletebutton{{$row->id}}",function(){
         if( confirm('are you sure')){
-            deleteCityManger($(this))
+            deletePackage($(this))
         }
            })
     })
 
 
-    function deleteCityManger(e){
+    function deletePackage(e){
     $(()=>{
         e.parent("div").parent("td").parent("tr").remove()
        let id=Number( e.parent("div").parent("td").siblings("td").html())
