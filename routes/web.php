@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CityMangerController;
+use App\Http\Controllers\CityManagerController;
 use Illuminate\Support\Facades\Route;
 use App\Models\CityManger;
 use App\Models\GymManger;
@@ -31,14 +31,14 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/gym_managers', [App\Http\Controllers\CityManagerController3::class, 'index'])->name('gym_managers');
+Route::get('/gym_managers', [App\Http\Controllers\CityManagerController::class, 'index'])->name('gym_managers');
 // Route::get('/gym_managers/list', [App\Http\Controllers\CityManagerController3::class, 'getCityManagers'])->name('gym_managers.list');
 
 
-Route::get('/city_managers', [App\Http\Controllers\CityManagerController3::class, 'index'])->name('city_managers');
-Route::get('/city_managers/list', [App\Http\Controllers\CityManagerController3::class, 'getCityManagers'])->name('city_managers.list');
+Route::get('/city_managers', [App\Http\Controllers\CityManagerController::class, 'index'])->name('city_managers');
+Route::get('/city_managers/list', [App\Http\Controllers\CityManagerController::class, 'getCityManagers'])->name('city_managers.list');
 
-Route::put('/city_manager/{city_manager}', [App\Http\Controllers\CityManagerController3::class, 'update'])->name('city_manager.update');
-Route::delete('/city_manager/{city_manager}', [App\Http\Controllers\CityManagerController3::class, 'destroy'])->name('city_manager.delete');
+Route::get('/city_manager/{city_manager}', [App\Http\Controllers\CityManagerController::class, 'edit'])->name('city_manager.edit');
+Route::delete('/city_manager/{city_manager}', [App\Http\Controllers\CityManagerController::class, 'destroy'])->name('city_manager.delete');
 
 Auth::routes();
