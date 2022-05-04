@@ -31,7 +31,12 @@ class CityManagerController extends Controller
             'national_id'=>$request_out["national_id"]
             
         ]);
-        return $CityManger;
+        return view('city_manager.view');
+    }
+
+    public function create(Request $request)
+    {
+        return view('city_manager.create');
     }
 
 
@@ -57,15 +62,14 @@ class CityManagerController extends Controller
         return view('city_manager.view');
     }
 
-    public function destroy( Request $request)
+    public function destroy(Request $request)
     {
-        
         $request_out=$request->all();
-        $citymanager=CityManger::where("id",$request_out['user_id'] )->first();
+        $citymanager=CityManger::where("id", $request_out['user_id'])->first();
 
-        CityManger::where("id",$request_out['user_id'] )->delete();
+        CityManger::where("id", $request_out['user_id'])->delete();
 
-        User::where('id',$citymanager['user_id'] )->delete();
+        User::where('id', $citymanager['user_id'])->delete();
         return back();
     }
 
