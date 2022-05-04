@@ -9,9 +9,8 @@
             <tr>
                 <th>id</th>
                 <th>Name</th>
-                <th>Gender</th>
-                <th>Date of Birth</th>
-                <th>Email</th>
+                <th>Price</th>
+                <th>Number of Sessions</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -31,7 +30,7 @@
         $('#datatable').DataTable({
             "processing": true,
             "serverSide": true,
-            "ajax": "{{ route('trainees.list') }}",
+            "ajax": "{{ route('trainingPackages.list') }}",
             "columns": [{
                     "data": "id"
                 },
@@ -40,16 +39,12 @@
                     "name": "name"
                 },
                 {
-                    "data": "gender",
-                    "name": "gender"
+                    "data": "price",
+                    "name": "price"
                 },
                 {
-                    "data": "date_of_birth",
-                    "name": "date_of_birth"
-                },
-                {
-                    "data": "email",
-                    "name": "email"
+                    "data": "num_of_sessions",
+                    "name": "num_of_sessions"
                 },
                 {
                     data: 'action',

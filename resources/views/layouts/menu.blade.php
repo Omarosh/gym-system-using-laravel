@@ -17,3 +17,8 @@
         <p>Trainees</p>
     </a>
 </li>
+<li class="nav-item">
+    <a href="{{ route('trainingPackages') }}" class="nav-link {{ Request::is('training_packages') ? 'active' : '' }}">
+        <p>Training Packages</p>
+    </a>
+</li>
