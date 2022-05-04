@@ -8,6 +8,6 @@
 <li class="nav-item">
     <a href="{{ route('city_managers') }}" class="nav-link {{ Request::is('gym_managers') ? 'active' : '' }}">
         <!-- <i class="nav-icon fas fa-home"></i> -->
-        <p>Gym Managers</p>
+        <p>City Managers</p>
     </a>
 </li>
