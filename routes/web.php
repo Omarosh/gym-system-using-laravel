@@ -1,17 +1,6 @@
 <?php
 
-use App\Http\Controllers\CityMangerController;
 use Illuminate\Support\Facades\Route;
-use App\Models\CityManger;
-use App\Models\GymManger;
-use App\Models\Gym;
-use App\Models\Coach;
-
-
-
-use App\Models\User;
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +12,9 @@ use App\Models\User;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Route::get('/', [CityMangerController::class,'update'])->name("citymanger.store");
-//Route::post('/citymanager', [CityMangerController::class,'store'])->name("citymanger.store");
-// Route::post('/citymanager',function(){
-//     return "lol";
-// });
+
+Route::get('/', function () {
+    return ['Laravel' => app()->version()];
+});
+
+require __DIR__.'/auth.php';
