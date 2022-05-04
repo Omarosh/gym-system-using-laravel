@@ -37,8 +37,12 @@ Route::get('/gym_managers', [App\Http\Controllers\CityManagerController::class, 
 
 Route::get('/city_managers', [App\Http\Controllers\CityManagerController::class, 'index'])->name('city_managers');
 Route::get('/city_managers/list', [App\Http\Controllers\CityManagerController::class, 'getCityManagers'])->name('city_managers.list');
-
 Route::get('/city_manager/{city_manager}', [App\Http\Controllers\CityManagerController::class, 'edit'])->name('city_manager.edit');
 Route::delete('/city_manager/{city_manager}', [App\Http\Controllers\CityManagerController::class, 'destroy'])->name('city_manager.delete');
+
+Route::get('/trainees', [App\Http\Controllers\TraineeController::class, 'index'])->name('trainees');
+Route::get('/trainees/list', [App\Http\Controllers\TraineeController::class, 'getTrainees'])->name('trainees.list');
+Route::get('/trainees/{trainee}', [App\Http\Controllers\CityManagerController::class, 'edit'])->name('trainee.edit');
+Route::delete('/trainees/{trainee}', [App\Http\Controllers\CityManagerController::class, 'destroy'])->name('trainee.delete');
 
 Auth::routes();
