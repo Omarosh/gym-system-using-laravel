@@ -75,14 +75,16 @@ class RegisterController extends Controller
         //     'email' => $data['email'],
         //     'password' => Hash::make($data['password']),
         // ]);
-
+        $form_role = $data['roles'] ;
+        
         $user =  User::create([
                     'name' => $data['name'],
                     'email' => $data['email'],
                     'password' => Hash::make($data['password']),
                 ]);
 
-        $form_role = $data['roles'] ;
+     
+            
         $role_id = DB::table('roles')->where('name', $form_role)->value('id');
         $user->roles()->sync($role_id) ;
 

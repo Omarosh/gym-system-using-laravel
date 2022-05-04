@@ -37,24 +37,24 @@ class CityManagerController extends Controller
 
     public function edit(Request $request, $id)
     {
-        return view('edit_city_manager_view');
+        return view('edit_city_manager_view', ['user_id' => $id]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $user_id)
     {
         $request_out=$request->all();
-        User::where('id', $request_out["user_id"])->update([
-            'name'=>$request_out["citymanger_name"],
-            'email'=>$request_out["citymanger_email"],
-            'password'=>$request_out["citymanger_password"]
-
-
+        User::where('id', $user_id)->update([
+            'name'=>$request_out["name"],
+            'email'=>$request_out["email"],
+            'password'=>$request_out["password"]
         ]);
-        CityManger::where("user_id", $request_out["user_id"])->update([
+        CityManger::where("user_id", $user_id)->update([
 
-            'city_name'=>$request_out["city_name"],
+            'city_name'=>$request_out["city"],
             'national_id'=>$request_out["national_id"]
         ]);
+
+        return view('city_manager.view');
     }
 
     public function destroy(Request $request, $id)

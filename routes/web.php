@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CityManagerController;
+use App\Http\Controllers\Auth\cityManagerRegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Models\CityManger;
 use App\Models\GymManger;
@@ -40,5 +41,9 @@ Route::get('/city_managers/list', [App\Http\Controllers\CityManagerController::c
 
 Route::get('/city_manager/{city_manager}', [App\Http\Controllers\CityManagerController::class, 'edit'])->name('city_manager.edit');
 Route::delete('/city_manager/{city_manager}', [App\Http\Controllers\CityManagerController::class, 'destroy'])->name('city_manager.delete');
+Route::put('/city_manager/{city_manager}', [App\Http\Controllers\CityManagerController::class, 'update'])->name('city_manager.update');
+
+
+
 
 Auth::routes();
