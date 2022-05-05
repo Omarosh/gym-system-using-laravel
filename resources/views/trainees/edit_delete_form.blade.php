@@ -23,24 +23,21 @@
 
 
     function deleteCityManger(e){
-    $(()=>{
-        e.parent("div").parent("td").parent("tr").remove()
-       let id=Number( e.parent("div").parent("td").siblings("td").html())
-       console.log(id);
-        $.ajax({
-    type: "POST",
-    url: '/trainees/delete',
-    data: { id: id, _token: '{{csrf_token()}}' },
-    success: function (data) {
-       console.log(data);
-    },
-    error: function (data, textStatus, errorThrown) {
-        console.log(data);
- 
-    },
-});
-                 
-})
-     
-}
+        $(()=>{
+            e.parent("div").parent("td").parent("tr").remove()
+            let id=Number( e.parent("div").parent("td").siblings("td").html())
+            $.ajax({
+                type: "POST",
+                url: '/trainees/delete',
+                data: { id: id, _token: '{{csrf_token()}}' },
+                success: function (data) {
+                console.log(data);
+                },
+                error: function (data, textStatus, errorThrown) {
+                    console.log(data);
+                },
+            });
+                    
+        })   
+    }
 </script>
