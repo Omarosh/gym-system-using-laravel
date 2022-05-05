@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<h1>Create City Manager</h1>
+<!-- <form method='POST' action="{{ route('city_manager.store')  }}"> -->
 <form method='POST' action="{{ route('city_manager.store')  }}">
     @csrf
     <label for=" fname">Email :</label><br>

@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <h2>Trainees Table</h2>
+    <h2>Training Packages Table</h2>
     <table class="table table-bordered" id="datatable">
         <thead>
             <tr>
@@ -18,6 +18,7 @@
         </tbody>
     </table>
 </div>
+<a href="{{route('package.create')}}">Create Package</a>
 <script script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js">
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js" defer></script>
