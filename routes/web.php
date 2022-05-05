@@ -71,4 +71,8 @@ Route::get('/gyms/list', [App\Http\Controllers\GymController::class, 'gymDatatab
 Route::get('/gyms/{training_package}', [App\Http\Controllers\GymController::class, 'edit'])->name('gyms.edit');
 Route::post('/gyms/delete', [App\Http\Controllers\GymController::class, 'destroy'])->name('gyms.delete');
 
+//Attendance:
+Route::get('/attendance',[App\Http\Controllers\AttendanceController::class,'getAttendance'])->name('attendance.list');
+Route::get('/showattendance',[App\Http\Controllers\AttendanceController::class,'index'])->name('attendance');
+
 Auth::routes();

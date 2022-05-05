@@ -27,3 +27,8 @@
         <p>Gyms</p>
     </a>
 </li>
+<li class="nav-item">
+    <a href="{{ route('attendance') }}" class="nav-link {{ Request::is('attendance') ? 'active' : '' }}">
+        <p>Attendance</p>
+    </a>
+</li>

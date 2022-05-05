@@ -20,7 +20,7 @@ class GymFactory extends Factory
             'name' => $this->faker->name(),
             'cover_image_path'=> 'Image',
             'city_name' => $this->faker->name(),
-            'city_manger_id' => 4,
+            'city_manger_id' => 1,
         ];
     }
 }
