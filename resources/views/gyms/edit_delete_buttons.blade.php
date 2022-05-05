@@ -9,7 +9,6 @@
 
     <form method="POST" action="{{ route('gyms.edit', $row->id) }}">
         @csrf
-        @method('PUT')
         <button type="submit" class="btn btn-info">Edit</button>
     </form>
 

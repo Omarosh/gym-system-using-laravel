@@ -18,7 +18,7 @@
                 
             </div>
 
-            @endsection
+@endsection
            
            
            

@@ -33,34 +33,40 @@ class GymController extends Controller
             'city_name'=> $request_out['city_name'],
         ]);
 
-        return view('gyms.view');
+        return redirect('gyms');
     }
 
+    public function edit(Request $request, $id)
+    {
+        return view('gyms.edit_form', ['id'=>$id]);
+    }
 
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
         $request_out=$request->all();
-        $citymanger=CityManger::where('city_name',$request_out['city_name'])->first();
+        // $citymanger=CityManger::where('city_name',$request_out['city_name'])->first();
         if($request['image']){
-            $gym= Gym::find($request['gym_id']);
+            $gym= Gym::find($id);
             File::delete(public_path('gyms_images/'. $gym['cover_image_path'])); 
             $image = $request->file('image');
             $new_name = rand() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('gyms_images'), $new_name); 
-            Gym::where('id',$request['gym_id'])->update([
-                'city_manger_id'=>$citymanger->user_id,
+            Gym::where('id',$id)->update([
+                // 'city_manger_id'=>$citymanger->user_id,
                 'name'=>$request_out['name'],
                 'cover_image_path'=>$new_name,
                 'city_name'=> $request_out['city_name'],
 
             ]);
         }else{
-            Gym::where('id',$request['gym_id'])->update([
+            Gym::where('id',$id)->update([
                 'name'=>$request_out['name'],
                 'city_name'=> $request_out['city_name'],
 
             ]);
         }
+
+        return redirect('gyms');
     }
 
     public function destroy(Request $request){
