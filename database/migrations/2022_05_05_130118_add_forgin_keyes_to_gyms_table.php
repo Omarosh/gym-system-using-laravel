@@ -12,14 +12,8 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('gyms', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('cover_image_path');
-            // $table->foreignId("city_manger_id")->references("user_id")->on("city_mangers");
-            $table->string('city_name');
-            
-            $table->timestamps();
+        Schema::table('gyms', function (Blueprint $table) {
+            $table->foreignId("city_manger_id")->references("user_id")->on("city_mangers");
         });
     }
 
@@ -30,6 +24,8 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('gyms');
+        Schema::table('gyms', function (Blueprint $table) {
+            //
+        });
     }
 };
