@@ -6,9 +6,13 @@ use Illuminate\Http\Request;
 use yajra\Datatables\Datatables;
 use App\Models\TrainingPackage;
 
-
 class TrainingPackagesController extends Controller
 {
+    public function create(Request $request)
+    {
+        return view('trainingPackages.create');
+    }
+    
     public function store(Request $request)
     {
         $request_out=$request->all();
@@ -18,8 +22,11 @@ class TrainingPackagesController extends Controller
             'price'=> $request_out['price'],
             'num_of_sessions'=> $request_out['num_of_sessions'],
         ])->id;
-        return $trainingPackage;
+        
+        return view('trainingPackages.view');
     }
+
+
 
     public function edit(Request $request, $id)
     {
@@ -39,7 +46,7 @@ class TrainingPackagesController extends Controller
     public function destroy(Request $request)
     {
         $request_out=$request->all();
-        TrainingPackage::where("id",$request_out['id'] )->delete();
+        TrainingPackage::where("id", $request_out['id'])->delete();
         return back();
     }
 
