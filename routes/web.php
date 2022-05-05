@@ -44,10 +44,14 @@ Route::post('/city_manager/store', [App\Http\Controllers\CityManagerController::
 Route::get('/create_city_manager', [App\Http\Controllers\CityManagerController::class, 'create'])->name('city_managers.create');
 
 // Packages Routes
-Route::get('/create_package', [App\Http\Controllers\GymController::class, 'create'])->name('gyms.create');
-Route::post('/package/store', [App\Http\Controllers\GymController::class, 'store'])->name('gyms.store');
+Route::get('/create_package', [App\Http\Controllers\TrainingPackagesController::class, 'create'])->name('package.create');
+Route::post('/package/store', [App\Http\Controllers\TrainingPackagesController::class, 'store'])->name('package.store');
+
 
 // Gym Routes
+Route::get('/create_gym', [App\Http\Controllers\GymController::class, 'create'])->name('gyms.create');
+Route::post('/gym/store', [App\Http\Controllers\GymController::class, 'store'])->name('gyms.store');
+
 
 
 
