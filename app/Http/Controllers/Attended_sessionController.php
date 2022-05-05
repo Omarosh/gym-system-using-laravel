@@ -24,7 +24,7 @@ class Attended_sessionController extends Controller
     $today_date=explode(" ",today());
 
 
-    
+   
     if($today_date[0]===$date[0]  ){
 
          if($sessions_attended<$package_session_num){ $attended_session = AttendedSession::create([

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\AttendedSessionResource;
 use App\Http\Resources\TraineeResource;
 use App\Models\Trainee;
 use Illuminate\Http\Request;
@@ -115,11 +116,7 @@ class TraineeController extends Controller
        $attended_sessions_arr=AttendedSession::where('trainee_id',$id);
        $attended_sessions_num=$attended_sessions_arr->count();
        $remaining_sessions=$training_package_sessions-$attended_sessions_num;
-    //    dd($training_package_sessions,$remaining_sessions);
-   
     
-    //   $obj->training_package_sessions=  $training_package_sessions;
-    //   dd($obj);
     $obj=['training_package_sessions'=>   $training_package_sessions,
 
           'remaining_sessions'=>$remaining_sessions
@@ -128,6 +125,19 @@ class TraineeController extends Controller
       return $obj;
 
     
+
+    }
+    public function show_trainee_history($id){
+
+        //training session name -> training sessions ->name
+        //gym name -> gym id from training sessions->get gym name from gyms by id
+        //attendance date-> created at in attended_sessions    done
+        //attendance time -> created at in attended_sessions   done
+
+        $attended_sessions=AttendedSession::with('session')->where('trainee_id',$id)->get();
+        
+        return AttendedSessionResource::collection($attended_sessions);
+        
 
     }
 

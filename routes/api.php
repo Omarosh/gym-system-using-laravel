@@ -85,3 +85,4 @@ Route::post('/attended_sessions/{attended_session}',[Attended_sessionController:
 Route::delete('/attended_sessions/{attended_session}',[Attended_sessionController::class,'destroy']);
 Route::get('/attended_sessions/{attended_session}',[Attended_sessionController::class,'show']);
 Route::get('/trainees/{trainee}/sessions',[TraineeController::class,'show_trainee_sessions']);
+Route::get('/trainees/{trainee}/history',[TraineeController::class,'show_trainee_history']);

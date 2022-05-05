@@ -22,6 +22,6 @@ class AttendedSession extends Model
     }
     public function session()
     {
-        return $this->belongsTo(TrainingSession::class);
+        return $this->belongsTo(TrainingSession::class,'training_session_id');
     }
 }
