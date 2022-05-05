@@ -21,7 +21,7 @@ class TraineeController extends Controller
             'email'=> $request_out['email'],
             'password' => $request_out['password']
         ])->id;
-        return $trainee;
+        redirect('trainees');
     }
 
     public function edit(Request $request, $id)
@@ -40,7 +40,7 @@ class TraineeController extends Controller
             'email'=> $request_out['email'],
             'passwd' => $request_out['password']
         ]);
-        return view('trainees.view');
+        return redirect('trainees');
     }
 
     public function destroy(Request $request)
