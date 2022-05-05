@@ -6,6 +6,7 @@ use App\Models\User;
 use yajra\Datatables\Datatables;
 use App\Models\CityManger;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File; 
 
 
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -52,24 +53,50 @@ class CityManagerController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit($user_id)
     {
-        return view('edit_city_manager_view', ['user_id' => $id]);
+        $manager= CityManger::where('user_id', $user_id)->first();
+
+        
+        return view('city_manager.edit_city_manager_view', ['manager' => $manager]);
     }
 
     public function update(Request $request, $user_id)
     {
         $request_out=$request->all();
-        User::where('id', $user_id)->update([
-            'name'=>$request_out["name"],
-            'email'=>$request_out["email"],
-            'password'=>$request_out["password"]
-        ]);
-        CityManger::where("user_id", $user_id)->update([
+        if($request['image']){
+                $manager= CityManger::where('user_id', $user_id)->first();
+                File::delete(public_path('cityManagers_images/'.$manager['image_path'])); 
+                $image = $request->file('image');
+                $new_name = rand() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('cityManagers_images'), $new_name); 
+                User::where('id', $user_id)->update([
+                    'name'=>$request_out["name"],
+                    'email'=>$request_out["email"],
+                    'password'=>$request_out["password"]
+                ]);
+                CityManger::where("user_id", $user_id)->update([
+        
+                    'city_name'=>$request_out["city"],
+                    'national_id'=>$request_out["national_id"],
+                    'image_path'=>$new_name,
+                ]);
+        }else{
+            User::where('id', $user_id)->update([
+                'name'=>$request_out["name"],
+                'email'=>$request_out["email"],
+                'password'=>$request_out["password"]
+            ]);
+            CityManger::where("user_id", $user_id)->update([
+    
+                'city_name'=>$request_out["city"],
+                'national_id'=>$request_out["national_id"]
+            ]);
 
-            'city_name'=>$request_out["city"],
-            'national_id'=>$request_out["national_id"]
-        ]);
+        }
+
+        
+     
 
         return redirect('city_managers');
     }

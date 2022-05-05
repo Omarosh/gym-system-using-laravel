@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\File; 
 
 use App\Models\GymManger;
 use Illuminate\Http\Request;
@@ -73,25 +74,51 @@ class GymManagerController extends Controller
         return view("gym_manager.view_gymManager", ["manager"=>$manager]);
     }
 
-    public function edit($id)
+    public function edit($user_id)
     {
-        return view('gym_manager.edit_form', ['user_id' => $id]);
+        $manager= GymManger::where('user_id', $user_id)->first();
+
+        return view('gym_manager.edit_form', ['manager' => $manager]);
     }
 
     public function update(Request $request, $user_id)
     {
         $request_out=$request->all();
-        User::where('id', $user_id)->update([
-            'name'=>$request_out["name"],
-            'email'=>$request_out["email"],
-            'password'=>$request_out["password"],
-        ]);
-        GymManger::where("user_id", $user_id)->update([
+        if($request['image']){
+                $manager= GymManger::where('user_id', $user_id)->first();
+                File::delete(public_path('gymManagers_images/'.$manager['image_path'])); 
+                $image = $request->file('image');
+                $new_name = rand() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('gymManagers_images'), $new_name); 
+                User::where('id', $user_id)->update([
+                    'name'=>$request_out["name"],
+                    'email'=>$request_out["email"],
+                    'password'=>$request_out["password"],
+                ]);
+                GymManger::where("user_id", $user_id)->update([
+        
+                    'city_name'=>$request_out["city"],
+                    'national_id'=>$request_out["national_id"],
+                    'gym_id'=>$request_out["gym_id"],
+                    'image_path'=>$new_name,
 
-            'city_name'=>$request_out["city"],
-            'national_id'=>$request_out["national_id"],
-            'gym_id'=>$request_out["gym_id"],
-        ]);
+                ]);
+        }else{
+            User::where('id', $user_id)->update([
+                'name'=>$request_out["name"],
+                'email'=>$request_out["email"],
+                'password'=>$request_out["password"],
+            ]);
+            GymManger::where("user_id", $user_id)->update([
+    
+                'city_name'=>$request_out["city"],
+                'national_id'=>$request_out["national_id"],
+                'gym_id'=>$request_out["gym_id"],
+            ]);
+
+        }
+      
+      
 
         return redirect('gym_managers');
     }
