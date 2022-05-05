@@ -30,7 +30,9 @@ class TrainingPackagesController extends Controller
 
     public function edit(Request $request, $id)
     {
-        return view('trainingPackages.edit_form', ['id'=>$id]);
+        $package= TrainingPackage::where('id',$id)->first();
+
+        return view('trainingPackages.edit_form', ['package'=>$package]);
     }
 
     public function update(Request $request, $id){

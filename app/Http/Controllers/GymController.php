@@ -38,7 +38,9 @@ class GymController extends Controller
 
     public function edit(Request $request, $id)
     {
-        return view('gyms.edit_form', ['id'=>$id]);
+        $gym= Gym::where('id',$id)->first();
+
+        return view('gyms.edit_form', ['gym'=>$gym]);
     }
 
     public function update(Request $request,$id)
