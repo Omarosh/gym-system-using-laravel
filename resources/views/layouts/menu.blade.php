@@ -28,7 +28,22 @@
     </a>
 </li>
 <li class="nav-item">
+    <a href="{{ route('trainingSessions') }}" class="nav-link {{ Request::is('training_sessions') ? 'active' : '' }}">
+        <p>Training Sessions</p>
+    </a>
+</li>
+<li class="nav-item">
     <a href="{{ route('gyms') }}" class="nav-link {{ Request::is('gyms') ? 'active' : '' }}">
         <p>Gyms</p>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{{ route('coaches') }}" class="nav-link {{ Request::is('coaches') ? 'active' : '' }}">
+        <p>Coaches</p>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{{ route('cities') }}" class="nav-link {{ Request::is('cities') ? 'active' : '' }}">
+        <p>Cities</p>
     </a>
 </li>

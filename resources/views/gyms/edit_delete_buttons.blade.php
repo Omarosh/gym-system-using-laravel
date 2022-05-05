@@ -39,7 +39,7 @@
             console.log(id);
             $.ajax({
                 type: "POST",
-                url: '/gyms/delete',
+                url: "{{ route('gyms.delete') }}",
                 data: { id: id, _token: '{{csrf_token()}}' },
                 success: function (data) {
                 console.log(data);
