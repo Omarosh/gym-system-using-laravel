@@ -7,7 +7,7 @@ use App\Models\GymManger;
 use App\Models\Gym;
 use App\Models\Coach;
 
-
+use App\Http\Controllers\StripeController;
 
 use App\Models\User;
 
@@ -23,8 +23,5 @@ use App\Models\User;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Route::get('/', [CityMangerController::class,'update'])->name("citymanger.store");
-//Route::post('/citymanager', [CityMangerController::class,'store'])->name("citymanger.store");
-// Route::post('/citymanager',function(){
-//     return "lol";
-// });
+
+Route::get('/payment', [StripeController::class, 'paymentGet'])->name('paymentGet');

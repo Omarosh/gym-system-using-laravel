@@ -6,6 +6,7 @@ use App\Http\Controllers\CityMangerController;
 use App\Http\Controllers\CoachController;
 use App\Http\Controllers\GymManagerController;
 use App\Http\Controllers\GymController;
+use App\Http\Controllers\StripeController;
 
 
 /*
@@ -35,3 +36,5 @@ Route::post('/coaches/{coach}',[CoachController::class,'update']);
 Route::delete('/coaches/{coach}',[CoachController::class,'destroy']);
 //Route::post('/citymanager', [CityMangerController::class,'store'])->name("citymanger.store");
 Route::post('/', [GymController::class,'update'])->name("citymanger.store");
+
+Route::post('/payment', [StripeController::class, 'handlePost'])->name('stripe.payment');
