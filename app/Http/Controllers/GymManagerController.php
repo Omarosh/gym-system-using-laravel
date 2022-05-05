@@ -8,6 +8,7 @@ use App\Models\User;
 
 class GymManagerController extends Controller
 {
+    
     public function index(){
        $gym_managers= GymManger::all();
          return $gym_managers;
@@ -39,7 +40,12 @@ class GymManagerController extends Controller
    }
    public function store(Request $request){
     $input = $request->all();
-    // dd($input);
+    $new_name=null;
+    if ($request['image']) {
+        $image = $request->file('image');
+        $new_name = rand() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('gymManagers_images'), $new_name);
+    }
    $user= User::create([
       'name'=>$input['name'],
       'email'=>$input['email'],
@@ -49,6 +55,7 @@ class GymManagerController extends Controller
         'user_id'=>$user,
         'city_name'=>$input['city_name'],
         'gym_id'=>$input['gym_id'] ,
+        'image_path'=> $new_name
         
         ]);
         return $user;
@@ -58,7 +65,10 @@ public function destroy($userId){
     User::where('id',$userId)->delete();
     
 }
-  
+public function view($GymMangerId){
+    $manager=GymManger::find($GymMangerId);
+    return view("gym_manager.view_gymManager",["manager"=>$manager]);
+}
 
 
 }

@@ -12,7 +12,7 @@ class CityManger extends Model
         'user_id',
         'city_name',
         'national_id',
-        
+        'image_path'
     ];
     public function user()
     {

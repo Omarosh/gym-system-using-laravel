@@ -17,6 +17,12 @@ class CityManagerController extends Controller
 {
     public function store(Request $request)
     {
+        $new_name=null;
+        if ($request['image']) {
+            $image = $request->file('image');
+            $new_name = rand() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('cityManagers_images'), $new_name);
+        }
         $request_out=$request->all();
         
         $user=User::create([
@@ -28,8 +34,8 @@ class CityManagerController extends Controller
         $CityManger=CityManger::create([
             'user_id'=>$user,
             'city_name'=>$request_out["city_name"],
-            'national_id'=>$request_out["national_id"]
-            
+            'national_id'=>$request_out["national_id"],
+            'image_path'=> $new_name
         ]);
         return view('city_manager.view');
     }
@@ -83,7 +89,10 @@ class CityManagerController extends Controller
         })
         -> make(true) ;
     }
-
+    public function view($cityManagerId){
+        $manager=CityManger::find($cityManagerId);
+        return view("city_manager.view_cityManager",["manager"=>$manager]);
+    }
    
 
     public function index(Request $request)

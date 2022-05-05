@@ -15,11 +15,9 @@ return new class extends Migration
     {
         Schema::create('city_mangers', function (Blueprint $table) {
             $table->id();
-           // $table->string('name');
-           // $table->string('email');
             $table->string('national_id');
-           // $table->string('passwd');
             $table->string('city_name');
+            $table->string('image_path');
             $table->timestamps();
            
         });

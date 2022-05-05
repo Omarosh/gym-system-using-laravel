@@ -13,7 +13,8 @@ class GymManger extends Model
         'city_name',
         'national_id',
         'gym_id',
-        'user_id'
+        'user_id',
+        'image_path'
         
     ];
 

@@ -42,6 +42,8 @@ Route::get('/city_manager/{city_manager}', [App\Http\Controllers\CityManagerCont
 Route::put('/city_manager/{city_manager}', [App\Http\Controllers\CityManagerController::class, 'update'])->name('city_manager.update');
 Route::post('/city_manager/store', [App\Http\Controllers\CityManagerController::class, 'store'])->name('city_manager.store');
 Route::get('/create_city_manager', [App\Http\Controllers\CityManagerController::class, 'create'])->name('city_managers.create');
+Route::post('/city_manager/view/{city_manager}/', [App\Http\Controllers\CityManagerController::class, 'view'])->name('city_manager.view');
+
 
 // Packages Routes
 Route::get('/create_package', [App\Http\Controllers\TrainingPackagesController::class, 'create'])->name('package.create');
@@ -51,6 +53,8 @@ Route::post('/package/store', [App\Http\Controllers\TrainingPackagesController::
 // Gym Routes
 Route::get('/create_gym', [App\Http\Controllers\GymController::class, 'create'])->name('gyms.create');
 Route::post('/gym/store', [App\Http\Controllers\GymController::class, 'store'])->name('gyms.store');
+Route::post('/gym/view/{gym}', [App\Http\Controllers\GymController::class, 'view'])->name('gyms.view');
+
 
 
 

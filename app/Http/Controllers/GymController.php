@@ -98,4 +98,8 @@ class GymController extends Controller
     {
         return view('gyms.view');
     }
+    public function view($gymId){
+        $gym=Gym::find($gymId);
+        return view("gyms.view_gym",["gym"=>$gym]);
+    }
 }
