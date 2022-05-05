@@ -20,6 +20,8 @@
       <tbody>
       </tbody>
    </table>
+   <a href="/create_attendance">Create Attendance</a>
+
 </div>
 <script script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js">
 </script>

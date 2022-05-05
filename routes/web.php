@@ -73,6 +73,9 @@ Route::post('/gyms/delete', [App\Http\Controllers\GymController::class, 'destroy
 
 //Attendance:
 Route::get('/attendance',[App\Http\Controllers\AttendanceController::class,'getAttendance'])->name('attendance.list');
-Route::get('/showattendance',[App\Http\Controllers\AttendanceController::class,'index'])->name('attendance');
+Route::get('/showattendance',[App\Http\Controllers\AttendanceController::class,'view'])->name('attendance');
+Route::get('/create_attendance',[App\Http\Controllers\AttendanceController::class,'create'])->name('attendance.create');
+Route::post('/store_attendance',[App\Http\Controllers\AttendanceController::class,'store'])->name('attendance.store');
+
 
 Auth::routes();
