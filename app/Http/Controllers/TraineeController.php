@@ -26,20 +26,21 @@ class TraineeController extends Controller
 
     public function edit(Request $request, $id)
     {
-        return view('edit_city_manager_view');
+        return view('trainees.edit_form', ['id'=>$id]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $request_out=$request->all();
-        Trainee::where('id', $request_out["id"])->update([
+        Trainee::where('id', $id)->update([
             'name'=> $request_out['name'],
             'gender'=> $request_out['gender'],
             'date_of_birth'=> $request_out['date_of_birth'],
             // 'imag_path'=> $request_out['imag_path'],
             'email'=> $request_out['email'],
-            'password' => $request_out['password']
+            'passwd' => $request_out['password']
         ]);
+        return view('trainees.view');
     }
 
     public function destroy(Request $request)

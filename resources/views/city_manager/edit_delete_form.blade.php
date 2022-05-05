@@ -9,12 +9,8 @@
         @csrf
         <button type='submit' class='btn btn-info' style="margin-left: 10px;">Edit</button>
     </form>
-    <!-- <form method='POST' action="{{ route('city_manager.delete', $row->user_id) }}"> -->
-        <!-- @csrf -->
-        <!-- @method('DELETE') -->
-        <button type="submit" id="deletebutton{{$row->id}}" class='deletebutton{{$row->id}} btn btn-danger'>Delete</button>
 
-    <!-- </form> -->
+        <button class='deletebutton btn btn-danger'>Delete</button>
 </div>
 <script>
     
@@ -54,5 +50,6 @@
      
 }    
 
-
-    </script>
+        })
+    }    
+</script>

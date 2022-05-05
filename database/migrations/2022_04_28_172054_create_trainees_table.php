@@ -20,6 +20,8 @@ return new class extends Migration {
             $table->string('imag_path');
             $table->string('email');
             $table->string('passwd');
+            $table->timestamps();
+          
         });
     }
 
