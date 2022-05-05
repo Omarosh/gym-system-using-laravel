@@ -8,21 +8,26 @@
 
 
 
-<form method='POST' action="{{ route('gym_manager.update',  $user_id) }}">
+<form method='POST' enctype="multipart/form-data"  action="{{ route('gym_manager.update',  $manager->user_id) }}">
     @csrf
     @method('PUT')
+    <center><img src='/gymManagers_images/{{ $manager->image_path }}' width=300 /></center>
+
     <label for=" fname">Email :</label><br>
-    <input type="text" id="email" name="email"><br><br>
+    <input type="text" id="email" value='{{$manager->user->email}}' name="email"><br><br>
     <label for="lname">Password :</label><br>
     <input type="text" id="password" name="password"><br><br>
     <label for="fname">Name :</label><br>
-    <input type="text" id="name" name="name"><br><br>
+    <input type="text" id="name"  value='{{$manager->user->name}}' name="name"><br><br>
     <label for="fname">Gym :</label><br>
-    <input type="text" id="gym_id" name="gym_id"><br><br>
+    <input type="text" id="gym_id"  value='{{$manager->gym->id}}' name="gym_id"><br><br>
     <label for="fname">City :</label><br>
-    <input type="text" id="city" name="city"><br><br>
+    <input type="text" id="city"  value='{{$manager->gym->city_name}}'name="city"><br><br>
     <label for="fname">National ID :</label><br>
-    <input type="text" id="national_id" name="national_id"><br><br>
+    <input type="text" id="national_id"  value='{{$manager->national_id}}' name="national_id"><br><br>
+    <label for="exampleFormControlTextarea1" class="form-label">Profile picture:</label><br>
+
+<input type="file" rows="3" id="exampleFormControlTextarea1" class="form-control" name="image" /><br><br>
     <input type="submit" value="Submit">
 </form>
 
