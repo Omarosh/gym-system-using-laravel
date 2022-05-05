@@ -48,8 +48,8 @@ Route::post('/city_manager/view/{city_manager}/', [App\Http\Controllers\CityMana
 
 
 // Packages Routes
-Route::get('/create_package', [App\Http\Controllers\TrainingPackagesController::class, 'create'])->name('package.create');
-Route::post('/package/store', [App\Http\Controllers\TrainingPackagesController::class, 'store'])->name('package.store');
+// Route::get('/create_package', [App\Http\Controllers\TrainingPackagesController::class, 'create'])->name('package.create');
+// Route::post('/package/store', [App\Http\Controllers\TrainingPackagesController::class, 'store'])->name('package.store');
 
 
 // Gym Routes
@@ -74,6 +74,7 @@ Route::put('/gym_manager/{gym_manager}', [App\Http\Controllers\GymManagerControl
 Route::post('/gym_manager/store', [App\Http\Controllers\GymManagerController::class, 'store'])->name('gym_manager.store');
 Route::get('/create_gym_manager', [App\Http\Controllers\GymManagerController::class, 'create'])->name('gym_manager.create');
 Route::post('/gym_manager/delete', [App\Http\Controllers\GymManagerController::class, 'destroy'])->name('gym_manager.delete');
+Route::post('/gym_manager/view/{manager}', [App\Http\Controllers\GymManagerController::class, 'view'])->name('gym_manager.view');
 
 // Trainees Routes
 Route::get('/trainees', [App\Http\Controllers\TraineeController::class, 'index'])->name('trainees');

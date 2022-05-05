@@ -3,7 +3,7 @@
 @section('content')
 <h1>Create Gym Manager</h1>
 <!-- <form method='POST' action="{{ route('city_manager.store')  }}"> -->
-<form method='POST' action="{{ route('gym_manager.store')  }}">
+<form method='POST'  enctype="multipart/form-data" action="{{ route('gym_manager.store')  }}">
     @csrf
     <label for=" fname">Email :</label><br>
     <input type="text" id="email" name="email"><br><br>
@@ -17,6 +17,8 @@
     <input type="text" id="national_id" name="national_id"><br><br>
     <label for="fname">Gym :</label><br>
     <input type="text" id="gym_id" name="gym_id"><br><br>
+    <input type="file" rows="3" id="exampleFormControlTextarea1" class="form-control" name="image" /><br><br>
+
     <input type="submit" value="Submit">
 </form>
 @endsection

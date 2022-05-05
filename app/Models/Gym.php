@@ -12,12 +12,12 @@ class Gym extends Model
         'name',
         'cover_image_path',
         'city_name',
-        'city_manger_id',
+        
         
     ];
 
-    public function cityManger()
-    {
-        return $this->belongsTo(CityManger::class);
-    }
+    // public function cityManger()
+    // {
+    //     return $this->belongsTo(CityManger::class);
+    // }
 }

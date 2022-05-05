@@ -10,8 +10,9 @@
                 <th>id</th>
                 <th>national_id</th>
                 <th>city_name</th>
-                <th>gym_id</th>
+                <th>gym_name</th>
                 <th>user_id</th>
+                <th>name</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -45,11 +46,16 @@
                     "data": "city_name"
                 },
                 {
-                    "data": "gym_id"
+                    "data": "gymname",
+                    "name": "gym.name"
                 },
                 {
                     "data": "user_id",
                     "name": "user_id"
+                },
+                {
+                    "data": "username",
+                    "name": "user.name"
                 },
                 {
                     data: 'action',

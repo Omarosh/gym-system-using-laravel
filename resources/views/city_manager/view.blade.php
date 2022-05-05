@@ -11,6 +11,8 @@
                 <th>national_id</th>
                 <th>city_name</th>
                 <th>user_id</th>
+                
+
                 <th>Action</th>
             </tr>
         </thead>
@@ -47,6 +49,7 @@
                     "data": "user_id",
                     "name": "user_id"
                 },
+               
                 {
                     data: 'action',
                     name: 'action',

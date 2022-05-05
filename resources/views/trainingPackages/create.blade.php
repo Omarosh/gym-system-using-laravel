@@ -2,7 +2,7 @@
 
 @section('content')
 <h1>Create Package</h1>
-<form method='POST' action="{{ route('package.store')  }}">
+<form method='POST' action="{{ route('packages.store')  }}">
     @csrf
     <label for=" fname">Package Name :</label><br>
     <input type="text" id="name" name="name"><br><br>

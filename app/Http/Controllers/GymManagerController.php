@@ -10,10 +10,16 @@ use yajra\Datatables\Datatables;
 class GymManagerController extends Controller
 {
     public function getGymManagers(){
-        $data = GymManger::all();
+        $data = GymManger::with('user');
         return DataTables::of($data)
         ->addColumn('action', function ($row) {
             return view('gym_manager.edit_delete_buttons', compact('row'))->render();
+        })
+        ->addColumn('username', function ($row) {
+            return $row->user->name;
+        })
+        ->addColumn('gymname', function ($row) {
+            return $row->gym->name;
         })
         -> make(true) ;
     }
@@ -53,7 +59,9 @@ class GymManagerController extends Controller
    }
 
 public function view($GymMangerId){
+    
     $manager=GymManger::find($GymMangerId);
+   
     return view("gym_manager.view_gymManager",["manager"=>$manager]);
 }
 

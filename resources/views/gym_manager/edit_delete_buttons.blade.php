@@ -5,6 +5,11 @@
     
     
     <div style="display: flex; justify-content:   space-around">
+    <form method="POST" action="{{ route('gym_manager.view', $row->id) }}">
+        @csrf
+       
+        <button type="submit" class="btn btn-info">View</button>
+</form>
         <form method='GET' action="{{ route('gym_manager.edit', $row->user_id ) }}">
             @csrf
             <button type='submit' class='btn btn-info' style="margin-left: 10px;">Edit</button>

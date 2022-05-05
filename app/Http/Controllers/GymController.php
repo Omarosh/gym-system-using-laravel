@@ -26,7 +26,7 @@ class GymController extends Controller
             $image->move(public_path('gyms_images'), $new_name);
         }
         $request_out=$request->all();
-        $citymanger=CityManger::where('city_name', $request_out['city_name'])->first();
+       // $citymanger=CityManger::where('city_name', $request_out['city_name'])->first();
         Gym::create([
             'name'=>$request_out['name'],
             'cover_image_path'=>$new_name,
@@ -82,12 +82,12 @@ class GymController extends Controller
 
     public function gymDatatables()
     {
-        $gyms=Gym::with('CityManger');
+        $gyms=Gym::all();
         return Datatables::of($gyms)
             ->editColumn('created_at', function ($gym) {
                 return $gym->created_at->format('d-m-Y');
             })
-            ->addColumn('cityManager', function ($gym) {
+            ->addColumn('cityName', function ($gym) {
                 return $gym->city_name;
             })
             ->addColumn('action', function ($row) {
