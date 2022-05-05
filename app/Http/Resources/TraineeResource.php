@@ -14,6 +14,13 @@ class TraineeResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            "id" => $this->id,
+            "nane"=> $this->name,
+            "date_of_birth"=>$this->date_of_birth,
+            "gender"=>$this->gender,
+            "image"=>$this->imag_path
+
+        ];
     }
 }
