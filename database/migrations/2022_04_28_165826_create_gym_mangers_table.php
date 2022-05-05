@@ -17,12 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('image_path');
             $table->string('city_name');
+            $table->string('national_id');
             $table->timestamps();
-
-
-
-
-            
         });
     }
 

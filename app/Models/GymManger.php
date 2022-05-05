@@ -9,7 +9,6 @@ class GymManger extends Model
 {
     use HasFactory;
     protected $fillable = [
-     
         'city_name',
         'national_id',
         'gym_id',

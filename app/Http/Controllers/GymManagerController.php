@@ -5,39 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\GymManger;
 use Illuminate\Http\Request;
 use App\Models\User;
+use yajra\Datatables\Datatables;
 
 class GymManagerController extends Controller
 {
-    
-    public function index(){
-       $gym_managers= GymManger::all();
-         return $gym_managers;
+    public function getGymManagers(){
+        $data = GymManger::all();
+        return DataTables::of($data)
+        ->addColumn('action', function ($row) {
+            return view('gym_manager.edit_delete_buttons', compact('row'))->render();
+        })
+        -> make(true) ;
     }
 
-   public function show($userId){
-       $gym_manager=GymManger::find($userId);
-       return $gym_manager;
-   }
+    public function index()
+    {
+        return view('gym_manager.view');
+    }
 
+   public function create(Request $request)
+    {
+        return view('gym_manager.create');
+    }
 
-
-   public function update(Request $request,$userId){
-    $input = $request->all();
-    // dd($input);
-    $user=User::where('id',$userId)->update([
-        'name'=>$input['name'],
-        'email'=>$input['email'],
-        'password'=>$input['password']
-
-    ]);
-    $gym_manager=GymManger::where('user_id', $userId)->update([
-       
-        'city_name'=>$input['city_name'],
-        'gym_id'=>$input['gym_id'] ,
-        
-        ]);
-        return $gym_manager;
-   }
    public function store(Request $request){
     $input = $request->all();
     $new_name=null;
@@ -54,21 +44,47 @@ class GymManagerController extends Controller
    $gym_manager= GymManger::create([
         'user_id'=>$user,
         'city_name'=>$input['city_name'],
+        'national_id'=>$input["national_id"],
         'gym_id'=>$input['gym_id'] ,
         'image_path'=> $new_name
+    ]);
         
-        ]);
-        return $user;
+        return redirect('gym_managers');
    }
-public function destroy($userId){
-    GymManger::where('id',$userId)->delete();
-    User::where('id',$userId)->delete();
-    
-}
+
 public function view($GymMangerId){
     $manager=GymManger::find($GymMangerId);
     return view("gym_manager.view_gymManager",["manager"=>$manager]);
 }
 
+    public function edit($id){
+        return view('gym_manager.edit_form', ['user_id' => $id]);
+    }
 
+    public function update(Request $request,$user_id){
+        $request_out=$request->all();
+        User::where('id', $user_id)->update([
+            'name'=>$request_out["name"],
+            'email'=>$request_out["email"],
+            'password'=>$request_out["password"],
+        ]);
+        GymManger::where("user_id", $user_id)->update([
+
+            'city_name'=>$request_out["city"],
+            'national_id'=>$request_out["national_id"],
+            'gym_id'=>$request_out["gym_id"],
+        ]);
+
+        return redirect('gym_managers');
+   }
+
+    public function destroy(Request $request){
+        $request_out=$request->all();
+        $cityManager=GymManger::where("id", $request_out['user_id'])->first();
+
+        GymManger::where("id", $request_out['user_id'])->delete();
+
+        User::where('id', $cityManager['user_id'])->delete();
+        return back();
+    }
 }

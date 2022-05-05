@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GymManger;
-use App\Models\Gym;
-use App\Models\Coach;
 use App\Models\User;
 use yajra\Datatables\Datatables;
 use App\Models\CityManger;
@@ -37,7 +34,7 @@ class CityManagerController extends Controller
             'national_id'=>$request_out["national_id"],
             'image_path'=> $new_name
         ]);
-        return view('city_manager.view');
+        return redirect('city_managers');
     }
 
     public function create(Request $request)
@@ -46,7 +43,7 @@ class CityManagerController extends Controller
     }
 
 
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
         return view('edit_city_manager_view', ['user_id' => $id]);
     }
@@ -65,22 +62,22 @@ class CityManagerController extends Controller
             'national_id'=>$request_out["national_id"]
         ]);
 
-        return view('city_manager.view');
+        return redirect('city_managers');
     }
 
     public function destroy(Request $request)
     {
         $request_out=$request->all();
-        $citymanager=CityManger::where("id", $request_out['user_id'])->first();
+        $cityManager=CityManger::where("id", $request_out['user_id'])->first();
 
         CityManger::where("id", $request_out['user_id'])->delete();
 
-        User::where('id', $citymanager['user_id'])->delete();
+        User::where('id', $cityManager['user_id'])->delete();
         return back();
     }
 
    
-    public function getCityManagers(Request $request)
+    public function getCityManagers()
     {
         $data = CityManger::all();
         return DataTables::of($data)
@@ -95,7 +92,7 @@ class CityManagerController extends Controller
     }
    
 
-    public function index(Request $request)
+    public function index()
     {
         return view('city_manager.view');
     }

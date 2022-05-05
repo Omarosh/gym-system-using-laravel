@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->string('name');
             $table->string('cover_image_path');
             $table->string('city_name');
-            
             $table->timestamps();
         });
     }
