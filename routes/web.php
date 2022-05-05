@@ -7,6 +7,8 @@ use App\Models\CityManger;
 use App\Models\GymManger;
 use App\Models\Gym;
 use App\Models\Coach;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 
 
@@ -24,10 +26,8 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-    $coach= Coach::find(1);
-
-    //$GYM->gymManger->name;
-   // dd($coach->gym->city_name);
+    // return ("hola") ;
+    // $role = Role::create(['name' => 'gym_manager']);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

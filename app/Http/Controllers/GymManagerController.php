@@ -6,10 +6,13 @@ use App\Models\GymManger;
 use Illuminate\Http\Request;
 use App\Models\User;
 use yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class GymManagerController extends Controller
 {
-    public function getGymManagers(){
+    public function getGymManagers()
+    {
         $data = GymManger::with('user');
         return DataTables::of($data)
         ->addColumn('action', function ($row) {
@@ -29,47 +32,54 @@ class GymManagerController extends Controller
         return view('gym_manager.view');
     }
 
-   public function create(Request $request)
+    public function create(Request $request)
     {
         return view('gym_manager.create');
     }
 
-   public function store(Request $request){
-    $input = $request->all();
-    $new_name=null;
-    if ($request['image']) {
-        $image = $request->file('image');
-        $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('gymManagers_images'), $new_name);
-    }
-   $user= User::create([
+    public function store(Request $request)
+    {
+        $input = $request->all();
+        $new_name=null;
+        if ($request['image']) {
+            $image = $request->file('image');
+            $new_name = rand() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('gymManagers_images'), $new_name);
+        }
+        $user= User::create([
       'name'=>$input['name'],
       'email'=>$input['email'],
-      'password'=>$input['password'],
+      'password'=>Hash::make($input['password']),
     ])->id;
-   $gym_manager= GymManger::create([
+        $gym_manager= GymManger::create([
         'user_id'=>$user,
         'city_name'=>$input['city_name'],
         'national_id'=>$input["national_id"],
         'gym_id'=>$input['gym_id'] ,
         'image_path'=> $new_name
     ]);
+
+        $role_id = DB::table('roles')->where('name', 'gym_manager')->value('id');
+        User::find($user)->roles()->sync($role_id) ;
+
         
         return redirect('gym_managers');
-   }
+    }
 
-public function view($GymMangerId){
-    
-    $manager=GymManger::find($GymMangerId);
+    public function view($GymMangerId)
+    {
+        $manager=GymManger::find($GymMangerId);
    
-    return view("gym_manager.view_gymManager",["manager"=>$manager]);
-}
+        return view("gym_manager.view_gymManager", ["manager"=>$manager]);
+    }
 
-    public function edit($id){
+    public function edit($id)
+    {
         return view('gym_manager.edit_form', ['user_id' => $id]);
     }
 
-    public function update(Request $request,$user_id){
+    public function update(Request $request, $user_id)
+    {
         $request_out=$request->all();
         User::where('id', $user_id)->update([
             'name'=>$request_out["name"],
@@ -84,9 +94,10 @@ public function view($GymMangerId){
         ]);
 
         return redirect('gym_managers');
-   }
+    }
 
-    public function destroy(Request $request){
+    public function destroy(Request $request)
+    {
         $request_out=$request->all();
         $cityManager=GymManger::where("id", $request_out['user_id'])->first();
 
