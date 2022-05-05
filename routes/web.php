@@ -95,9 +95,9 @@ Route::post('/training_packages/delete', [App\Http\Controllers\TrainingPackagesC
 // gyms Routes
 Route::get('/gyms', [App\Http\Controllers\GymController::class, 'index'])->name('gyms');
 Route::get('/gyms/list', [App\Http\Controllers\GymController::class, 'gymDatatables'])->name('gyms.list');
+Route::post('/gyms/delete', [App\Http\Controllers\GymController::class, 'destroy'])->name('gyms.delete');
 Route::post('/gyms/{training_package}', [App\Http\Controllers\GymController::class, 'edit'])->name('gyms.edit');
 Route::put('/gyms/{training_package}', [App\Http\Controllers\GymController::class, 'update'])->name('gyms.update');
-Route::post('/gyms/delete', [App\Http\Controllers\GymController::class, 'destroy'])->name('gyms.delete');
 
 //cities Routes
 Route::get('/cities', [App\Http\Controllers\CitiesController::class, 'index'])->name('cities');
@@ -113,5 +113,13 @@ Route::put('/coach/{coach}', [App\Http\Controllers\CoachController::class, 'upda
 Route::get('/create_coach', [App\Http\Controllers\CoachController::class, 'create'])->name('coach.create');
 Route::post('/coach/view/{coach}/', [App\Http\Controllers\CoachController::class, 'view'])->name('coach.view');
 
+//training sessions Routes
+Route::get('/create_session', [App\Http\Controllers\TrainingSessionController::class, 'create'])->name('session.create');
+Route::post('/session/store', [App\Http\Controllers\TrainingSessionController::class, 'store'])->name('sessions.store');
+Route::post('/session/{id}', [App\Http\Controllers\TrainingSessionController::class, 'update'])->name('session.update');
+Route::get('/training_sessions', [App\Http\Controllers\TrainingSessionController::class, 'index'])->name('trainingSessions');
+Route::get('/training_sessions/list', [App\Http\Controllers\TrainingSessionController::class, 'getTrainingSessions'])->name('trainingSessions.list');
+Route::get('/training_sessions/{training_session}', [App\Http\Controllers\TrainingSessionController::class, 'edit'])->name('trainingSessions.edit');
+Route::post('/training_sessions/delete', [App\Http\Controllers\TrainingSessionController::class, 'destroy'])->name('trainingSessions.delete');
 
 Auth::routes();
