@@ -76,4 +76,8 @@ Route::get('/gyms/list', [App\Http\Controllers\GymController::class, 'gymDatatab
 Route::get('/gyms/{training_package}', [App\Http\Controllers\GymController::class, 'edit'])->name('gyms.edit');
 Route::post('/gyms/delete', [App\Http\Controllers\GymController::class, 'destroy'])->name('gyms.delete');
 
+Route::get('/purchase_operations', [App\Http\Controllers\PurchaseOperationController::class, 'index'])->name('purchase_operations');
+Route::get('/purchase_operations/list', [App\Http\Controllers\PurchaseOperationController::class, 'getDatatables'])->name('purchase_operations.list');
+
+
 Auth::routes();
