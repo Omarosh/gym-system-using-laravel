@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Gym;
 use App\Models\GymManger;
 use Illuminate\Support\Facades\File; 
+use yajra\Datatables\Datatables;
 
 
 class GymController extends Controller
@@ -68,5 +69,25 @@ class GymController extends Controller
         $gyms= Gym::all();
      }
 
+     public function gymDatatables()
+    {
+        $gyms=Gym::with('CityManger');
+        return Datatables::of($gyms)
+            ->editColumn('created_at', function ($gym) 
+            {
+                return $gym->created_at->format('d-m-Y');
+            })
+            ->addColumn('cityManager', function ($gym) 
+            {
+                return $gym->city_name;
+            })
+            ->addColumn('action', function($row){
+                return view('gyms.edit_delete_buttons', compact('row'))->render();
+            })
+            ->make(true);
+    }
 
+    public function index(){
+        return view('gyms.view');
+    }
 }

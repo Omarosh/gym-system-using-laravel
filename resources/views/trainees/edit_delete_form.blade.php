@@ -8,24 +8,25 @@
         <button type='submit' class='btn btn-info' style="margin-left: 10px;">Edit</button>
     </form>
 
-    <button class='deletebutton btn btn-danger'>Delete</button>
+    <button class='deletebutton{{$row->id}}  btn btn-danger'>Delete</button>
 </div>
 
 <script>
    
     $(()=>{
-    $("body").on("click",".deletebutton",function(){
+    $("body").on("click",".deletebutton{{$row->id}}",function(){
         if( confirm('are you sure')){
-            deleteCityManger($(this))
+            deleteTrainee($(this))
         }
            })
     })
 
 
-    function deleteCityManger(e){
+    function deleteTrainee(e){
         $(()=>{
             e.parent("div").parent("td").parent("tr").remove()
             let id=Number( e.parent("div").parent("td").siblings("td").html())
+            console.log(id);
             $.ajax({
                 type: "POST",
                 url: '/trainees/delete',
@@ -35,9 +36,10 @@
                 },
                 error: function (data, textStatus, errorThrown) {
                     console.log(data);
+            
                 },
             });
-                    
+                        
         })   
     }
 </script>
