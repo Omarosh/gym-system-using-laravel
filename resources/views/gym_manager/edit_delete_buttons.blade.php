@@ -4,6 +4,7 @@
     </head>
     
     
+    
     <div style="display: flex; justify-content:   space-around">
     <form method="POST" action="{{ route('gym_manager.view', $row->id) }}">
         @csrf

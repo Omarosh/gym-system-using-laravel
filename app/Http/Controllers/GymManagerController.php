@@ -9,6 +9,7 @@ use App\Models\User;
 use yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StoreGymManagerRequest;
 
 class GymManagerController extends Controller
 {
@@ -38,7 +39,7 @@ class GymManagerController extends Controller
         return view('gym_manager.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreGymManagerRequest $request)
     {
         $input = $request->all();
         $new_name=null;
@@ -81,7 +82,7 @@ class GymManagerController extends Controller
         return view('gym_manager.edit_form', ['manager' => $manager]);
     }
 
-    public function update(Request $request, $user_id)
+    public function update(StoreGymManagerRequest $request, $user_id)
     {
         $request_out=$request->all();
         if($request['image']){

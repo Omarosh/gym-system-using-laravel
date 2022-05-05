@@ -8,6 +8,7 @@ use App\Models\CityManger;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File; 
 
+use App\Http\Requests\StoreCityManagerRequest;
 
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +17,7 @@ use Illuminate\Http\Request;
 
 class CityManagerController extends Controller
 {
-    public function store(Request $request)
+    public function store(StoreCityManagerRequest $request)
     {
         $request_out=$request->all();
 
@@ -61,7 +62,7 @@ class CityManagerController extends Controller
         return view('city_manager.edit_city_manager_view', ['manager' => $manager]);
     }
 
-    public function update(Request $request, $user_id)
+    public function update(StoreCityManagerRequest $request, $user_id)
     {
         $request_out=$request->all();
         if($request['image']){

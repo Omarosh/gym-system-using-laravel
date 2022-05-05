@@ -5,6 +5,7 @@
 <form method='POST' enctype="multipart/form-data" action="{{ route('gyms.update', $gym->id)  }}">
     @csrf
     @method('PUT')
+
     <center><img src='/gyms_images/{{ $gym->cover_image_path }}' width=300 /></center>
 
     <label for=" fname">Name :</label><br>
