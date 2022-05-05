@@ -32,3 +32,8 @@
         <p>Gyms</p>
     </a>
 </li>
+<li class="nav-item">
+    <a href="{{ route('coaches') }}" class="nav-link {{ Request::is('coaches') ? 'active' : '' }}">
+        <p>Coaches</p>
+    </a>
+</li>
