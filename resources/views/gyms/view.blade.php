@@ -7,10 +7,11 @@
     <table class="table table-bordered" id="datatable">
        <thead>
           <tr>
+            <th>ID</th>
              <th>Name</th>
              <th>Created at</th>
              <th>cover_image</th>
-             <th>City Manager Name</th>
+             <th>City Name</th>
              <th>Actions</th>
           </tr>
        </thead>
@@ -32,6 +33,9 @@
           "serverSide": true,
           "ajax": "{{ route('gyms.list') }}",
           "columns": [{
+                "data": "id"
+             },
+             {
                 "data": "name"
              },
              {
@@ -41,7 +45,7 @@
                 "data": "cover_image_path"
              },
              {
-                "data": "cityManager","name":"cityManager.city_name"
+                "data": "city_name",
              },
              {  "data" :'action',
                 "name" : 'action',

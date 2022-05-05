@@ -12,6 +12,11 @@
     </a>
 </li>
 <li class="nav-item">
+    <a href="{{ route('gym_managers') }}" class="nav-link {{ Request::is('gym_managers') ? 'active' : '' }}">
+        <p>Gym Manager</p>
+    </a>
+</li>
+<li class="nav-item">
     <a href="{{ route('trainees') }}" class="nav-link {{ Request::is('trainees') ? 'active' : '' }}">
         <!-- <i class="nav-icon fas fa-home"></i> -->
         <p>Trainees</p>

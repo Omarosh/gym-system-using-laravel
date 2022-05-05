@@ -23,7 +23,7 @@ class TrainingPackagesController extends Controller
             'num_of_sessions'=> $request_out['num_of_sessions'],
         ])->id;
         
-        return view('trainingPackages.view');
+        return redirect('training_packages');
     }
 
 
@@ -41,6 +41,8 @@ class TrainingPackagesController extends Controller
             'price'=> $request_out['price'],
             'num_of_sessions'=> $request_out['num_of_sessions'],
         ]);
+
+        return redirect('training_packages');
     }
 
     public function destroy(Request $request)
