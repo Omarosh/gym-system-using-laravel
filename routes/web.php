@@ -99,6 +99,10 @@ Route::post('/gyms/{training_package}', [App\Http\Controllers\GymController::cla
 Route::put('/gyms/{training_package}', [App\Http\Controllers\GymController::class, 'update'])->name('gyms.update');
 Route::post('/gyms/delete', [App\Http\Controllers\GymController::class, 'destroy'])->name('gyms.delete');
 
+//cities Routes
+Route::get('/cities', [App\Http\Controllers\CitiesController::class, 'index'])->name('cities');
+Route::get('/cities/list', [App\Http\Controllers\CitiesController::class, 'getCities'])->name('cities.list');
+
 //coaches Routes
 Route::get('/coaches', [App\Http\Controllers\CoachController::class, 'index'])->name('coaches');
 Route::get('/coaches/list', [App\Http\Controllers\CoachController::class, 'getCoaches'])->name('coaches.list');
@@ -108,5 +112,6 @@ Route::post('/coach/{coach}', [App\Http\Controllers\CoachController::class, 'edi
 Route::put('/coach/{coach}', [App\Http\Controllers\CoachController::class, 'update'])->name('coach.update');
 Route::get('/create_coach', [App\Http\Controllers\CoachController::class, 'create'])->name('coach.create');
 Route::post('/coach/view/{coach}/', [App\Http\Controllers\CoachController::class, 'view'])->name('coach.view');
+
 
 Auth::routes();
