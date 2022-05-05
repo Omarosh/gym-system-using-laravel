@@ -9,6 +9,13 @@ use App\Models\User;
 use yajra\Datatables\Datatables;
 use App\Models\CityManger;
 
+use Illuminate\Support\Facades\DB;
+
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Hash;
+
 
 
 use Illuminate\Http\Request;
@@ -18,7 +25,7 @@ class CityManagerController extends Controller
     public function store(Request $request)
     {
         $request_out=$request->all();
-        
+
         $user=User::create([
             'name'=> $request_out['name'],
             'email'=> $request_out['email'],
@@ -28,9 +35,14 @@ class CityManagerController extends Controller
         $CityManger=CityManger::create([
             'user_id'=>$user,
             'city_name'=>$request_out["city_name"],
-            'national_id'=>$request_out["national_id"]
+            'national_id'=>Hash::make($request_out["national_id"])
             
         ]);
+
+        
+        $role_id = DB::table('roles')->where('name', 'city_manager')->value('id');
+        User::find($user)->roles()->sync($role_id) ;
+
         return view('city_manager.view');
     }
 
