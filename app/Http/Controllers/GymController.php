@@ -81,7 +81,7 @@ class GymController extends Controller
         if ($gym_has_sessions === null) {
             // sessions doesn't exist
             Gym::where("id", $request_out['id'])->delete();
-            return ('doesnt dddd   removed');
+            return ('removed');
         } else {
             return('doesnt removed');
         }
