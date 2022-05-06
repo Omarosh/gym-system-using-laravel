@@ -56,9 +56,9 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     $request->fulfill();
     
     return redirect('/home');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+})->middleware(['auth', 'sanctum'])->name('verification.verify');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/training_packages', [TrainingPackageController::class,'store']);
     Route::get('/trainees/{trainee}', [TraineeController::class,'show']);
     Route::post('/training_sessions', [TrainingSessionController::class,'store']);
