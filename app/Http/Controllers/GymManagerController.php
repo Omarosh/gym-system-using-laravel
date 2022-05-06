@@ -58,7 +58,8 @@ class GymManagerController extends Controller
         'city_name'=>$input['city_name'],
         'national_id'=>$input["national_id"],
         'gym_id'=>$input['gym_id'] ,
-        'image_path'=> $new_name
+        'image_path'=> $new_name,
+        'status'=>0,
     ]);
 
         $role_id = DB::table('roles')->where('name', 'gym_manager')->value('id');
@@ -133,5 +134,12 @@ class GymManagerController extends Controller
 
         User::where('id', $cityManager['user_id'])->delete();
         return back();
+    }
+
+    public function status(Request $request){
+        $request_out=$request->all();
+        GymManger::where("id",$request_out['user_id'])->update([
+            'status'=>$request_out['status']
+        ]);
     }
 }
