@@ -3,9 +3,8 @@
 @section('content')
 
 <div class="container">  
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="panel">
+    
+            <div class="panel mt-5 p-5">
                 <div class="panel-heading">
                     <div class="row text-center">
                         <h3 class="panel-heading">Payment Details</h3>
@@ -32,20 +31,76 @@
                                                     id="payment-form">
                         @csrf
                         
-                        <label for=" fname">trainee_id :</label><br>
-                        <input class="form-control" type="text" id="trainee_id" name="trainee_id"><br>
+
+                        <div class='form-row row'>
+                            <div class='col-xs-12 form-group required'>
+                                <label for="trainee_email" class='control-label'>Trainee Email</label>
+                                <input class="form-control" type="text" id="trainee_email" name="trainee_email">
+                            </div>
+                        </div>
                         
-                        <label for="fname">package_id :</label><br>
-                        <input class="form-control" type="text" id="package_id" name="package_id"><br><br>
-                    
-                        <label for="fname">gym_id :</label><br>
-                        <input class="form-control" type="text" id="gym_id" name="gym_id"><br><br>
-                    
-                        <label for="fname">created_by_id :</label><br>
-                        <input class="form-control" type="text" id="created_by_id" name="created_by_id"><br><br>
-                    
-                        <label for="fname">price :</label><br>
-                        <input class="form-control" type="text" id="price" name="price"><br><br>
+                        <?php function price($price){
+                            if(strlen($price)>=3){
+                                return substr_replace($price, ".", 2, 0);
+                            }else if(strlen($price)==2){
+                                return '0.'.$price;
+                            }else if(strlen($price)==1){
+                                return '0.0'.$price;
+                            }else{
+                                return "???";
+                            }
+                            } ?>
+                        <div class='form-row row'>
+                            <div class='col-xs-12 form-group required'>
+                                <label for="package_id" class='control-label'>package_id :</label> 
+                                {{-- <input class="form-control" type="text" id="package_id" name="package_id"> --}}
+                                <select class="form-control" id="package_id" name="package_id">
+                                    @foreach ($packages as $item)
+                                        <option value="{{$item[0]}}">{{$item[1]}} - {{price($item[2])}}$ - ( {{$item[3]}} Sessions)</option>
+                                    @endforeach
+            
+                                </select>
+                            </div>
+                        </div>
+
+                        {{-- @hasanyrole('city_manager|admin') --}}
+                        {{-- @hasrole('city_manager') --}}
+
+                        <div class='form-row row'>
+                            <div class='col-xs-12 form-group required'>
+                                <label for="gym_id" class='control-label'>gym_id :</label>
+                                {{-- <input class="form-control" type="text" id="gym_id" name="gym_id"> --}}
+                                <select class="form-control" id="gym_id" name="gym_id">
+    
+                                    @foreach ($gyms as $item)
+                                        <option value="{{$item[0]}}">{{$item[1]}} - {{$item[2]}}</option>
+                                    @endforeach
+            
+                                </select>
+                            </div>
+                        </div>
+                        {{-- @endhasrole --}}
+                        {{-- @endhasanyrole --}}
+
+
+                        {{-- <div class='form-row row'>
+                            <div class='col-xs-12 form-group required'>
+                                <label for="created_by_id" class='control-label'>created_by_id :</label>
+                                <input class="form-control" type="text" id="created_by_id" name="created_by_id">
+                            </div>
+                        </div> --}}
+                        <input class="form-control" type="hidden" id="created_by_id" value="{{1}}" name="created_by_id">
+
+
+                        {{-- <div class='form-row row'>
+                            <div class='col-xs-12 form-group required'>
+                                <label for="price" class='control-label'>price</label>
+                                <input class="form-control" type="text" id="price" name="price">
+                            </div>
+                        </div> --}}
+
+
+
 
                         <div class='form-row row'>
                             <div class='col-xs-12 form-group required'>
@@ -88,16 +143,17 @@
   
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="btn btn-info btn-lg btn-block" type="submit">Pay Now {{"(150)"}}</button>
+                                <button class="btn btn-info btn-lg btn-block" type="submit">Pay Now</button>
                             </div>
                         </div>
                           
                     </form>
                 </div>
             </div>        
-        </div>
-    </div>
+        
 </div>
+
+
 @endsection
 
 @section('third_party_scripts')

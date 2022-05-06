@@ -18,6 +18,15 @@
             <span class="info-box-number">{{$city}}</span>
         </div>
     </div>
+    @if(Session::has("success"))
+<div class="container my-5">
+    <div class="row my-5">
+        <div style="width: fit-content; left: 45%; position: absolute; opacity: 0.75;" class="bg bg-success my-3 py-2 px-3 bg-opacity-50">
+            <span>{{Session::get("success")}}</span>
+        </div>
+    </div>
+</div>
+@endif
     <table class="table table-bordered" id="datatable">
         <thead>
             <tr>
@@ -34,11 +43,7 @@
         </tbody>
     </table>
 </div>
-{{-- @if($success)
-<div style="width: fit-content; left: 45%; position: absolute; opacity: 0.75;" class="bg bg-success my-3 py-2 px-3 bg-opacity-50">
-    <span>Payment was successful!</span>
-</div>
-@endif --}}
+
 
 @endsection
 

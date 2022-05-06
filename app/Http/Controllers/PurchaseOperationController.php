@@ -41,44 +41,19 @@ class PurchaseOperationController extends Controller
 
     public function payment_success(Request $request)
     {
-        // echo "Session: ";
-        // var_dump(Session::get('client_secrets'));
-        // echo "request:" ;
-        // dd($request->all()["payment_intent_client_secret"]);
-        // if (isset($request->all()["redirect_status"]) && Session::has('client_secrets')) {
-        //     if ($request->all()["redirect_status"] === "succeeded" && Session::get('client_secrets') == $request->all()["payment_intent_client_secret"]) {
-        //     }
-        // }
         return view('purchase_operations.view', ['success' => 'success']);
     }
 
     public function index(Request $request)
     {
-        // echo "Session: ";
-        // var_dump(Session::get('client_secrets'));
-        // echo "request:" ;
-        // dd($request->all()["payment_intent_client_secret"]);
-        // if (isset($request->all()["redirect_status"]) && Session::has('client_secrets')) {
-        //     if ($request->all()["redirect_status"] === "succeeded" && Session::get('client_secrets') == $request->all()["payment_intent_client_secret"]) {
-        //     }
-        // }
-        // return view('purchase_operations.view');
-
-        
-        // $gymid = GymManger::where('user_id' , Auth::id())->select(['gym_id'])->first();
-        // $gym = PurchaseOperation::where('gym_id',$gymid->gym_id)->sum('price');
-
-        $cityManagerId = Gym::where('city_manger_id',Auth::id())->select(['id'])->first();
-        $city = PurchaseOperation::where('gym_id',$cityManagerId->id)->sum('price');
-                return view('purchase_operations.view',[
-            // "gym" => $gym,
+        $cc = CityManger::where("user_id", Auth::id())->first()->id ;
+        $gymId = Gym::where('city_manger_id', $cc)->first()->id;
+        $city = PurchaseOperation::where('gym_id', $gymId)->sum('price');
+        return view('purchase_operations.view', [
             "city" => $city
         ]);
     }
-    public function store(Request $request)
-    {
-        //
-    }
+   
     public function buy_package()
     {
         return view('purchase_operations.buy_package');
@@ -86,7 +61,7 @@ class PurchaseOperationController extends Controller
 
     public function totalRevenue()
     {
-        $total = PurchaseOperation::select('price','surname')->sum();
-        return view('purchase_operations.view',["total"=>$total]);
+        $total = PurchaseOperation::select('price', 'surname')->sum();
+        return view('purchase_operations.view', ["total"=>$total]);
     }
 }
