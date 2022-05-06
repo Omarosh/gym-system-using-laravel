@@ -9,6 +9,7 @@ use App\Models\Trainee;
 use App\Models\TrainingPackage;
 use App\Models\TrainingSession;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class AttendedSessionController extends Controller
 {
@@ -74,4 +75,36 @@ class AttendedSessionController extends Controller
          AttendedSession::where('id',$attended_session_id)->delete();
      }
  
+     public function getAttendance()
+    {
+        $models = AttendedSession::with(['trainee', 'session']);
+        return DataTables::of($models)
+            ->addColumn('traineename', function ($model) {
+                return $model->trainee->name;
+            })
+            ->addColumn('traineeemail', function ($model) {
+                return $model->trainee->email;
+            })
+            ->addColumn('sessions', function ($model) {
+                return $model->session->name;
+            })
+            ->editColumn('date', function ($model) {
+                return $model->created_at->format('d-m-Y');
+            })
+            ->editColumn('time', function ($model) {
+                return $model->created_at->format('H:i');
+            })
+            ->addColumn('gym', function ($model) {
+                return $model->session->gym->name;
+            })
+            ->addColumn('city', function ($model) {
+                return $model->session->gym->city_name;
+            })
+            ->toJson();
+    }
+    
+    public function view()
+    {
+        return view('attendance.view');
+    }
 }
