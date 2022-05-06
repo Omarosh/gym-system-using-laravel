@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -13,8 +14,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('training_sessions', function (Blueprint $table) {
-            $table->timestamps();
+        Schema::table('trainees', function (Blueprint $table) {
+            $table->unsignedBigInteger('training_package_id')->nullable();
+            $table->foreign('training_package_id')->references('id')->on('training_packages');
+
         });
     }
 
@@ -25,7 +28,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('training_sessions', function (Blueprint $table) {
+        Schema::table('trainees', function (Blueprint $table) {
             //
         });
     }

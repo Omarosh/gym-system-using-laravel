@@ -17,12 +17,6 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="{{ route('trainees') }}" class="nav-link {{ Request::is('trainees') ? 'active' : '' }}">
-        <!-- <i class="nav-icon fas fa-home"></i> -->
-        <p>Trainees</p>
-    </a>
-</li>
-<li class="nav-item">
     <a href="{{ route('trainingPackages') }}" class="nav-link {{ Request::is('training_packages') ? 'active' : '' }}">
         <p>Training Packages</p>
     </a>
@@ -45,5 +39,10 @@
 <li class="nav-item">
     <a href="{{ route('cities') }}" class="nav-link {{ Request::is('cities') ? 'active' : '' }}">
         <p>Cities</p>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{{ route('trainees') }}" class="nav-link {{ Request::is('trainees') ? 'active' : '' }}">
+        <p>Trainees</p>
     </a>
 </li>

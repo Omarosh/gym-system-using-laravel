@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class TrainingPackage extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'name',
         'price',
         "num_of_sessions",
     ];
-    use HasFactory;
+  
 }

@@ -28,4 +28,6 @@ class TrainingSession extends Model
     {
         return $this->belongsTo(Coach::class);
     }
+
+   
 }
