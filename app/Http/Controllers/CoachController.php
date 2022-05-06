@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Coach;
+use App\Models\Gym;
+
 use yajra\Datatables\Datatables;
 class CoachController extends Controller
 {
@@ -27,7 +29,11 @@ class CoachController extends Controller
 
     public function create(Request $request)
     {
-        return view('coaches.create');
+      $gyms = [];
+      foreach (Gym::all() as $k) {
+          array_push($gyms, [$k["id"] , $k["name"]]);
+      }
+        return view('coaches.create',['gyms'=> $gyms]);
     }
 
     public function store(Request $request){
@@ -41,7 +47,11 @@ class CoachController extends Controller
 
     public function edit($id)
     {
-        return view('coaches.edit_form', ['id' => $id]);
+      $gyms = [];
+      foreach (Gym::all() as $k) {
+          array_push($gyms, [$k["id"] , $k["name"]]);
+      }
+        return view('coaches.edit_form', ['id' => $id,'gyms'=> $gyms]);
     }
 
     public function update(Request $request ,$coachId){
