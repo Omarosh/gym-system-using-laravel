@@ -61,6 +61,7 @@ class StripeController extends Controller
                     $trn = $trn->email;
                     return redirect()->route('purchase_operations')->with('success', "Payment was successful for $trn") ;
                 } catch (\Throwable $th) {
+                    error_log($th);
                     Session::flash('fail', 'Fatal DB Error - Invalid Trainee Data');
                     return back();
                 }
