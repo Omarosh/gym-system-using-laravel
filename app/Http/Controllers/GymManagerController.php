@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\File; 
 
 use App\Models\GymManger;
+use App\Models\CityManger;
+
+use App\Models\Gym;
+
 use Illuminate\Http\Request;
 use App\Models\User;
 use yajra\Datatables\Datatables;
@@ -31,12 +35,22 @@ class GymManagerController extends Controller
 
     public function index()
     {
+        
         return view('gym_manager.view');
     }
 
     public function create(Request $request)
     {
-        return view('gym_manager.create');
+        $gyms = [];
+        foreach (Gym::all() as $k) {
+            array_push($gyms, [$k["id"] , $k["name"]]);
+        }
+        $cities = [];
+        foreach (CityManger::all() as $k) {
+            array_push($cities, [$k["id"] , $k["city_name"]]);
+        }
+        return view('gym_manager.create', [ 'gyms' => $gyms,'cities' => $cities]);
+        
     }
 
     public function store(StoreGymManagerRequest $request)
@@ -70,6 +84,7 @@ class GymManagerController extends Controller
 
     public function view($GymMangerId)
     {
+        
         $manager=GymManger::find($GymMangerId);
    
         return view("gym_manager.view_gymManager", ["manager"=>$manager]);
@@ -77,9 +92,18 @@ class GymManagerController extends Controller
 
     public function edit($user_id)
     {
+        $gyms = [];
+        foreach (Gym::all() as $k) {
+            array_push($gyms, [$k["id"] , $k["name"]]);
+        }
+        $cities = [];
+        foreach (CityManger::all() as $k) {
+            array_push($cities, [$k["id"] , $k["city_name"]]);
+        }
+      
         $manager= GymManger::where('user_id', $user_id)->first();
 
-        return view('gym_manager.edit_form', ['manager' => $manager]);
+        return view('gym_manager.edit_form', ['manager' => $manager,'gyms' => $gyms,'cities' => $cities]);
     }
 
     public function update(StoreGymManagerRequest $request, $user_id)

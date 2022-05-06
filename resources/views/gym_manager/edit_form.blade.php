@@ -39,10 +39,23 @@
     <input type="password" id="password" name="password"><br><br>
     <label for="fname">Name :</label><br>
     <input type="text" id="name"  value='{{$manager->user->name}}' name="name"><br><br>
-    <label for="fname">Gym :</label><br>
-    <input type="text" id="gym_id"  value='{{$manager->gym->id}}' name="gym_id"><br><br>
+    <label for="fname">GYM:</label>
+
+    <select class="form-control" name="gym_id">
+
+            @foreach ($gyms as $item)
+                <option value="{{$item[0]}}">{{$item[1]}}</option>
+            @endforeach
+
+</select><br><br>
     <label for="fname">City :</label><br>
-    <input type="text" id="city"  value='{{$manager->gym->city_name}}'name="city"><br><br>
+    <select class="form-control" name="city">
+
+            @foreach ($cities as $item)
+                <option value="{{$item[1]}}">{{$item[1]}}</option>
+            @endforeach
+
+</select><br><br> 
     <label for="fname">National ID :</label><br>
     <input type="text" id="national_id"  value='{{$manager->national_id}}' name="national_id"><br><br>
     <label for="exampleFormControlTextarea1" class="form-label">Profile picture:</label><br>

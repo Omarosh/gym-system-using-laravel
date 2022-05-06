@@ -15,6 +15,7 @@ class GymController extends Controller
 {
     public function create(Request $request)
     {
+        
         return view('gyms.create');
     }
     

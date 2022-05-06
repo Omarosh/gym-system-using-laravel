@@ -21,11 +21,23 @@
     <label for="fname">Name :</label><br>
     <input type="text" id="name" name="name"><br><br>
     <label for="fname">City :</label><br>
-    <input type="text" id="city_name" name="city_name"><br><br>
-    <label for="fname">National ID :</label><br>
+    <select class="form-control" name="city_name">
+
+            @foreach ($cities as $item)
+                <option value="{{$item[1]}}">{{$item[1]}}</option>
+            @endforeach
+
+</select><br><br> 
+   <label for="fname">National ID :</label><br>
     <input type="text" id="national_id" name="national_id"><br><br>
-    <label for="fname">Gym :</label><br>
-    <input type="text" id="gym_id" name="gym_id"><br><br>
+    <label for="fname">GYM:</label>
+    <select class="form-control" name="gym_id">
+
+            @foreach ($gyms as $item)
+                <option value="{{$item[0]}}">{{$item[1]}}</option>
+            @endforeach
+
+</select><br><br>
     <input type="file" rows="3" id="exampleFormControlTextarea1" class="form-control" name="image" /><br><br>
 
     <input type="submit" value="Submit">
