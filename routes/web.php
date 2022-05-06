@@ -79,5 +79,10 @@ Route::post('/gyms/delete', [App\Http\Controllers\GymController::class, 'destroy
 Route::get('/purchase_operations', [App\Http\Controllers\PurchaseOperationController::class, 'index'])->name('purchase_operations');
 Route::get('/purchase_operations/list', [App\Http\Controllers\PurchaseOperationController::class, 'getDatatables'])->name('purchase_operations.list');
 
+Route::get('/buy_package', [App\Http\Controllers\PurchaseOperationController::class, 'buy_package'])->name('buy_package');
+Route::get('/payment_success', [App\Http\Controllers\PurchaseOperationController::class, 'payment_success'])->name('payment_success');
+Route::post('/payment_operations', [App\Http\Controllers\PurchaseOperationController::class, 'store'])->name('payment_operation.store');
 
+Route::get('/stripe-payment', [StripeController::class, 'handleGet2'])->name('stripe-payment');
+Route::post('/stripe-payment', [StripeController::class, 'handlePost2'])->name('stripe.payment');
 Auth::routes();

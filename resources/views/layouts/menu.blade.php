@@ -32,3 +32,8 @@
         <p>Purchase Operations</p>
     </a>
 </li>
+<li class="nav-item">
+    <a href="{{ route('stripe-payment') }}" class="nav-link {{ Request::is('stripe-payment') ? 'active' : '' }}">
+        <p>Buy Package</p>
+    </a>
+</li>
