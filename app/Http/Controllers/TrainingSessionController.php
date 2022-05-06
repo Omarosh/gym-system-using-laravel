@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use yajra\Datatables\Datatables;
 use App\Models\TrainingSession;
 use App\Models\Gym;
+use App\Models\Coach;
+
 
 
 class TrainingSessionController extends Controller
@@ -16,7 +18,11 @@ class TrainingSessionController extends Controller
         foreach (Gym::all() as $k) {
             array_push($gyms, [$k["id"] , $k["name"]]);
         }
-        return view('trainingSessions.create',['gyms'=>$gyms]);
+        $coaches = [];
+        foreach (Coach::all() as $k) {
+            array_push($coaches, [$k["id"] , $k["name"]]);
+        }
+        return view('trainingSessions.create',['gyms'=>$gyms,'coaches'=>$coaches]);
     }
     
     public function store(Request $request)
@@ -40,7 +46,11 @@ class TrainingSessionController extends Controller
         foreach (Gym::all() as $k) {
             array_push($gyms, [$k["id"] , $k["name"]]);
         }
-        return view('trainingSessions.edit_form', ['id'=>$id,'gyms'=>$gyms]);
+        $coaches = [];
+        foreach (Coach::all() as $k) {
+            array_push($coaches, [$k["id"] , $k["name"]]);
+        }
+        return view('trainingSessions.edit_form', ['id'=>$id,'gyms'=>$gyms,'coaches'=>$coaches]);
     }
 
     public function update(Request $request, $id){
