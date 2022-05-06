@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('trainingpackeges', function (Blueprint $table) {
+        Schema::create('training_packages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->integer('price');

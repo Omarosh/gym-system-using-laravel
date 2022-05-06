@@ -58,17 +58,19 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     return redirect('/home');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
-Route::post('/training_packages',[TrainingPackageController::class,'store']);
-Route::get('/trainees/{trainee}',[TraineeController::class,'show']);
-Route::post('/training_sessions',[TrainingSessionController::class,'store']);
-Route::get('/training_sessions/{training_session}',[TrainingSessionController::class,'show']);
-Route::post('training_sessions/{training_session}',[TrainingSessionController::class,'update']);
-Route::get('training_sessions',[TrainingSessionController::class,'index']);    //done 
-Route::delete('training_sessions/{training_session}',[TrainingSessionController::class,'destroy']);
-Route::post('/attended_sessions',[AttendedSessionController::class,'store']); //must decrease number of available sessions
-Route::get('/attended_sessions',[AttendedSessionController::class,'index']);
-Route::post('/attended_sessions/{attended_session}',[AttendedSessionController::class,'update']);
-Route::delete('/attended_sessions/{attended_session}',[AttendedSessionController::class,'destroy']);
-Route::get('/attended_sessions/{attended_session}',[AttendedSessionController::class,'show']);
-Route::get('/trainees/{trainee}/sessions',[TraineeController::class,'show_trainee_sessions']);
-Route::get('/trainees/{trainee}/history',[TraineeController::class,'show_trainee_history']);
+Route::middleware(['auth'])->group(function () {
+    Route::post('/training_packages', [TrainingPackageController::class,'store']);
+    Route::get('/trainees/{trainee}', [TraineeController::class,'show']);
+    Route::post('/training_sessions', [TrainingSessionController::class,'store']);
+    Route::get('/training_sessions/{training_session}', [TrainingSessionController::class,'show']);
+    Route::post('training_sessions/{training_session}', [TrainingSessionController::class,'update']);
+    Route::get('training_sessions', [TrainingSessionController::class,'index']);    //done
+    Route::delete('training_sessions/{training_session}', [TrainingSessionController::class,'destroy']);
+    Route::post('/attended_sessions', [AttendedSessionController::class,'store']); //done
+    Route::get('/attended_sessions', [AttendedSessionController::class,'index']); //done
+    Route::post('/attended_sessions/{attended_session}', [AttendedSessionController::class,'update']);
+    Route::delete('/attended_sessions/{attended_session}', [AttendedSessionController::class,'destroy']);
+    Route::get('/attended_sessions/{attended_session}', [AttendedSessionController::class,'show']);  //done
+    Route::get('/trainees/{trainee}/sessions', [TraineeController::class,'show_trainee_sessions']);  //done
+    Route::get('/trainees/{trainee}/history', [TraineeController::class,'show_trainee_history']); //done
+});

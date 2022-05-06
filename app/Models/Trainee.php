@@ -13,6 +13,7 @@ use App\Models\Trainingpackege;
 class Trainee extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
+
     use HasFactory;
     public $timestamps = false;
 
@@ -23,7 +24,7 @@ class Trainee extends Authenticatable implements MustVerifyEmail
         'imag_path',
         'email',
         'passwd',
-        'training_package_id',
+        // 'training_package_id',
     ];
 
 

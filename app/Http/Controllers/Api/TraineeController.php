@@ -8,6 +8,7 @@ use App\Http\Requests\StoreTraineeRequest;
 use App\Http\Resources\AttendedSessionResource;
 use App\Http\Resources\TraineeResource;
 use App\Models\Attended;
+use App\Models\AttendedSession;
 use App\Models\Trainee;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
@@ -163,8 +164,10 @@ class TraineeController extends Controller
     }
     public function show_trainee_sessions($id){
        $trainee_package_id=Trainee::find($id)->training_package_id;
-       $training_package_sessions=TrainingPackage::find($trainee_package_id)->num_of_sessions;
-       $attended_sessions_arr=Attended::where('trainee_id',$id);
+       $package = TrainingPackage::find($trainee_package_id);
+       if ($package == null) {return "you haven't buyed a package yet";}
+       $training_package_sessions=$package->num_of_sessions;
+       $attended_sessions_arr=AttendedSession::where('trainee_id',$id);
        $attended_sessions_num=$attended_sessions_arr->count();
        $remaining_sessions=$training_package_sessions-$attended_sessions_num;
     
@@ -185,7 +188,7 @@ class TraineeController extends Controller
         //attendance date-> created at in attended_sessions    done
         //attendance time -> created at in attended_sessions   done
 
-        $attended_sessions=Attended::with('session')->where('trainee_id',$id)->get();
+        $attended_sessions=AttendedSession::with('session')->where('trainee_id',$id)->get();
         
         return AttendedSessionResource::collection($attended_sessions);
         
