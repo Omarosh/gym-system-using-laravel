@@ -30,4 +30,12 @@
     <input type="datetime-local" name="finishes_at"><br><br>
     <input type="submit" value="Submit">
 </form>
+
+<script>
+    var msg = '{{Session::get('alert')}}';
+    var exist = '{{Session::has('alert')}}';
+    if(exist){
+      alert(msg);
+    }
+</script>
 @endsection
