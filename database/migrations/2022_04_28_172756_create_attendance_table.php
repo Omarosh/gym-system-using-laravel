@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('attended', function (Blueprint $table) {
+        Schema::create('attended_sessions', function (Blueprint $table) {
             $table->id();
             $table->foreignId("trainee_id")->references("id")->on("trainees");
             $table->foreignId("training_session_id")->references("id")->on("training_sessions");

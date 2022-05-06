@@ -24,7 +24,7 @@ class StoreTraineeRequest extends FormRequest
     public function rules()
     {
         return [
-            "email"=>['required','unique:App\Models\Trainee,email,'.$this->trainee],
+            "email"=>['required','unique:App\Models\Trainee,email,'.$this->id],
             "name"=>['required'],
             "gender"=>['required'],
             "date_of_birth"=>['required'],

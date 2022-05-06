@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
  
+use App\Models\Trainingpackege;
 class Trainee extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -21,9 +22,14 @@ class Trainee extends Authenticatable implements MustVerifyEmail
         'date_of_birth',
         'imag_path',
         'email',
-        'passwd'
+        'passwd',
+        'training_package_id',
     ];
 
-   
+
+   public function trainingpackege(){
+       return $this->hasOne(Trainingpackege::class);
+   }
+
 
 }

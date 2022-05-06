@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTraineeRequest;
+use App\Http\Resources\AttendedSessionResource;
 use App\Http\Resources\TraineeResource;
+use App\Models\Attended;
 use App\Models\Trainee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +14,9 @@ use App\Notifications\verifiedTrainee;
 use Illuminate\Validation\ValidationException;
 
 
+use App\Models\AttendedSession;
+use App\Models\TrainingPackage;
+use App\Models\Trainingpackege;
 
 
 class TraineeController extends Controller
@@ -75,6 +80,22 @@ class TraineeController extends Controller
 
         $token = $user->createToken($request->device_name)->plainTextToken;
         return ["user info"=> new TraineeResource($user),"token"=>$token];
+       
+        //Here is post method of meha
+        // // $trainee = Trainee::create(['name','gender','date_of_birth','the path','email','passwd']);
+        // $request['passwd'] = Hash::make($request['passwd']);
+        // // dd($request->all());
+        // $trainee = Trainee::create([
+        //     'name'=>$request['name'],
+        //     'gender'=>$request['gender'],
+        //     'date_of_birth'=>$request['date_of_birth'],
+        //     'imag_path'=>$request['imag_path'],
+        //     'email'=>$request['email'],
+        //     'passwd'=>$request['passwd'],
+        //     'training_package_id'=>$request['training_package_id']
+        // ]);
+        // // event(new Registered($trainee));
+        // return $trainee;
     }
 
     /**
@@ -85,7 +106,11 @@ class TraineeController extends Controller
      */
     public function show($id)
     {
-        //
+
+        
+        $trainee=Trainee::find($id);
+        // dd($trainee->name);
+        return $trainee;
     }
 
     /**
@@ -109,15 +134,17 @@ class TraineeController extends Controller
      */
     public function update(StoreTraineeRequest $request)
     {
-        $request->new_email = $request->new_email ?? $request->email;
-        $trainee_id = Trainee::select("id")->where('email',$request->email)->first();
-        Trainee::where('id',$trainee_id)
+        $fileInRequest = $request->file('image'); 
+        $request->merge(['imag_path' => $fileInRequest]);
+        $request['passwd'] = Hash::make($request['passwd']);
+        Trainee::where('id',$request->id)
         ->update([
           'name'=>$request->name,
           'gender'=>$request->gender,
-          'email'=>$request->new_email,
+          'email'=>$request->email,
           'date_of_birth'=>$request->date_of_birth,
-
+          'passwd'=>$request->passwd,
+          "imag_path"=>$request->imag_path,
         ]);
     }
 
@@ -131,4 +158,36 @@ class TraineeController extends Controller
     {
         //
     }
+    public function show_trainee_sessions($id){
+       $trainee_package_id=Trainee::find($id)->training_package_id;
+       $training_package_sessions=TrainingPackage::find($trainee_package_id)->num_of_sessions;
+       $attended_sessions_arr=Attended::where('trainee_id',$id);
+       $attended_sessions_num=$attended_sessions_arr->count();
+       $remaining_sessions=$training_package_sessions-$attended_sessions_num;
+    
+    $obj=['training_package_sessions'=>   $training_package_sessions,
+
+          'remaining_sessions'=>$remaining_sessions
+        
+    ];
+      return $obj;
+
+    
+
+    }
+    public function show_trainee_history($id){
+
+        //training session name -> training sessions ->name
+        //gym name -> gym id from training sessions->get gym name from gyms by id
+        //attendance date-> created at in attended_sessions    done
+        //attendance time -> created at in attended_sessions   done
+
+        $attended_sessions=Attended::with('session')->where('trainee_id',$id)->get();
+        
+        return AttendedSessionResource::collection($attended_sessions);
+        
+
+    }
+
+
 }
