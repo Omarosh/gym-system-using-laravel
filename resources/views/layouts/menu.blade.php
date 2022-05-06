@@ -14,11 +14,13 @@
 </li>
 @endhasanyrole
 
+@hasanyrole('city_manager|admin')
 <li class="nav-item">
     <a href="{{ route('gym_managers') }}" class="nav-link {{ Request::is('gym_managers') ? 'active' : '' }}">
         <p>Gym Manager</p>
     </a>
 </li>
+@endhasanyrole
 <li class="nav-item">
     <a href="{{ route('trainingPackages') }}" class="nav-link {{ Request::is('training_packages') ? 'active' : '' }}">
         <p>Training Packages</p>
