@@ -126,4 +126,4 @@ Route::post('/training_sessions/delete', [App\Http\Controllers\TrainingSessionCo
 Route::get('/attendedtable', [App\Http\Controllers\Api\AttendedSessionController::class,'getAttendance'])->name('attendance.list');
 Route::get('/attendedview', [App\Http\Controllers\Api\AttendedSessionController::class,'view'])->name('attendance');
 
-Auth::routes();
+Auth::routes(['register'=>false]);
