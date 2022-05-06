@@ -74,3 +74,4 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/trainees/{trainee}/sessions', [TraineeController::class,'show_trainee_sessions']);  //done
     Route::get('/trainees/{trainee}/history', [TraineeController::class,'show_trainee_history']); //done
 });
+
