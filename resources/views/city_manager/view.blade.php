@@ -11,7 +11,7 @@
                 <th>national_id</th>
                 <th>city_name</th>
                 <th>user_id</th>
-                
+
 
                 <th>Action</th>
             </tr>
@@ -20,7 +20,10 @@
         </tbody>
     </table>
 </div>
+@hasrole('admin')
 <a href="/create_city_manager">Create City Manager</a>
+@endhasrole
+
 
 <script script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js">
 </script>
@@ -49,7 +52,7 @@
                     "data": "user_id",
                     "name": "user_id"
                 },
-               
+
                 {
                     data: 'action',
                     name: 'action',

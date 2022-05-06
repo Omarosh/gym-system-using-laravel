@@ -20,7 +20,10 @@
         </tbody>
     </table>
 </div>
+@hasanyrole('city_manager|admin')
 <a href="/create_gym_manager">Create Gym Manager</a>
+@endhasanyrole
+
 
 <script script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js">
 </script>
