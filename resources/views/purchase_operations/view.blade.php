@@ -4,15 +4,30 @@
 
 <div class="container">
     <h2>Purchase Operations</h2>
+    <!-- <div class="info-box">
+        <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
+        <div class="info-box-content">
+            <span class="info-box-text">the total revenue of my gym</span>
+            <span class="info-box-number"></span>
+        </div>
+    </div> -->
+    <div class="info-box">
+        <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
+        <div class="info-box-content">
+            <span class="info-box-text">the total revenue of my city</span>
+            <span class="info-box-number">{{$city}}</span>
+        </div>
+    </div>
     <table class="table table-bordered" id="datatable">
         <thead>
             <tr>
-                <th>id</th>
-                <th>trainee_id</th>
-                <th>package_id</th>
-                <th>gym_id</th>
-                <th>created_by_id</th>
-                <th>price</th>
+                <th>Trainee Name</th>
+                <th>Trainee Email</th>
+                <th>package name</th>
+                <th>amount the user bought</th>
+                <th>Gym</th>
+                <th>City</th>
+                <th>Created By</th>
             </tr>
         </thead>
         <tbody>
@@ -42,28 +57,27 @@
             "serverSide": true,
             "ajax": "{{ route('purchase_operations.list') }}",
             "columns": [{
-                    "data": "id"
+                    "data": "traineename",
                 },
                 {
-                    "data": "trainee_id",
-                    "name": "trainee_id"
+                    "data": "traineeemail",
                 },
                 {
-                    "data": "package_id",
-                    "name": "package_id"
-                },
-                {
-                    "data": "gym_id",
-                    "name": "gym_id"
-                },
-                {
-                    "data": "created_by_id",
-                    "name": "created_by_id"
+                    "data": "packegename"
                 },
                 {
                     "data": "price",
-                    "name": "price"
                 },
+                {
+                    "data": "gym",
+                },
+                {
+                    "data": "city",
+                },
+                {
+                    "data": "createdby",
+                },
+
             ]
         });
     });
