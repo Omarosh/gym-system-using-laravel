@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Models\TrainingPackage;
 use Illuminate\Http\Request;
-use App\Models\Trainingpackege;
+
 class TrainingPackageController extends Controller
 {
     public function store(Request $request)
@@ -14,7 +16,7 @@ class TrainingPackageController extends Controller
             
         
         
-        $package=Trainingpackege::create([
+        $package=TrainingPackage::create([
         'name'=>$input['name'],
         'price'=>$input['price'],
         'num_of_sessions'=>$input['num_of_sessions'],

@@ -7,10 +7,11 @@ use App\Http\Controllers\CityMangerController;
 use App\Http\Controllers\CoachController;
 use App\Http\Controllers\GymManagerController;
 use App\Http\Controllers\GymController;
-use App\Http\Controllers\TraineeController;
+use App\Http\Controllers\Api\TraineeController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use App\Http\Controllers\TrainingPackageController;
-use App\Http\Controllers\TrainingSessionController;
+use App\Http\Controllers\Api\TrainingPackageController;
+use App\Http\Controllers\Api\TrainingSessionController;
+use App\Http\Controllers\Api\AttendedSessionController;
 use App\Models\Trainee;
 use App\Models\Trainingpackege;
 use Illuminate\Support\Facades\Hash;
@@ -64,10 +65,10 @@ Route::get('/training_sessions/{training_session}',[TrainingSessionController::c
 Route::post('training_sessions/{training_session}',[TrainingSessionController::class,'update']);
 Route::get('training_sessions',[TrainingSessionController::class,'index']);    //done 
 Route::delete('training_sessions/{training_session}',[TrainingSessionController::class,'destroy']);
-Route::post('/attended_sessions',[Attended_sessionController::class,'store']); //must decrease number of available sessions
-Route::get('/attended_sessions',[Attended_sessionController::class,'index']);
-Route::post('/attended_sessions/{attended_session}',[Attended_sessionController::class,'update']);
-Route::delete('/attended_sessions/{attended_session}',[Attended_sessionController::class,'destroy']);
-Route::get('/attended_sessions/{attended_session}',[Attended_sessionController::class,'show']);
+Route::post('/attended_sessions',[AttendedSessionController::class,'store']); //must decrease number of available sessions
+Route::get('/attended_sessions',[AttendedSessionController::class,'index']);
+Route::post('/attended_sessions/{attended_session}',[AttendedSessionController::class,'update']);
+Route::delete('/attended_sessions/{attended_session}',[AttendedSessionController::class,'destroy']);
+Route::get('/attended_sessions/{attended_session}',[AttendedSessionController::class,'show']);
 Route::get('/trainees/{trainee}/sessions',[TraineeController::class,'show_trainee_sessions']);
 Route::get('/trainees/{trainee}/history',[TraineeController::class,'show_trainee_history']);

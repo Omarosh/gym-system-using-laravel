@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\TrainingSession;
 use Illuminate\Http\Request;
 
@@ -43,6 +44,4 @@ class TrainingSessionController extends Controller
    public function destroy($sessionId){
     TrainingSession::where('id',$sessionId)->delete();
    }
-
-
 }

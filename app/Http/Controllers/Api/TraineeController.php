@@ -1,26 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreTraineeRequest;
 use App\Http\Resources\AttendedSessionResource;
 use App\Http\Resources\TraineeResource;
 use App\Models\Attended;
 use App\Models\Trainee;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use App\Notifications\verifiedTrainee;
 use Illuminate\Validation\ValidationException;
-
-
-use App\Models\AttendedSession;
 use App\Models\TrainingPackage;
-use App\Models\Trainingpackege;
 
 
 class TraineeController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -51,13 +49,18 @@ class TraineeController extends Controller
      */
     public function store(StoreTraineeRequest $request )//,Request $request,)
     {
-        $fileInRequest = $request->file('image'); 
-        $request->merge(['imag_path' => $fileInRequest]);
-        $request['passwd'] = Hash::make($request['passwd']);
-        $trainee = Trainee::create($request->all());
-        event(new Registered($trainee));
-        $trainee->notify(new verifiedTrainee());   //send greeting notification this is needed to be done after verification
-
+        if ($request->passwd === $request->passwd_confirmation)
+        {
+            $fileInRequest = $request->file('image'); 
+            $request->merge(['imag_path' => $fileInRequest]);
+            $request['passwd'] = Hash::make($request['passwd']);
+            $trainee = Trainee::create($request->all());
+            event(new Registered($trainee));
+            $trainee->notify(new verifiedTrainee());   //send greeting notification this is needed to be done after verification
+        }
+        else {
+            return "password and password_confirmation are not identical"; 
+        }
     }
 
     public function login(Request $request) {
@@ -188,6 +191,4 @@ class TraineeController extends Controller
         
 
     }
-
-
 }
