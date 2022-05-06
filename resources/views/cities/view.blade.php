@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@hasanyrole('city_manager|admin')
 
 <div class="container">
     <h2>City Managers Table</h2>
@@ -27,16 +28,15 @@
             "processing": true,
             "serverSide": true,
             "ajax": "{{ route('cities.list') }}",
-            "columns": [
-                {
-                    "data": "city_name",
-                    "name": "city_name"
-                },
-            ]
+            "columns": [{
+                "data": "city_name",
+                "name": "city_name"
+            }, ]
         });
     });
 </script>
 
+@endhasanyrole
 
 @endsection
 @section('third_party_scripts')
