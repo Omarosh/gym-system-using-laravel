@@ -66,7 +66,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('training_sessions/{training_session}', [TrainingSessionController::class,'update']);
     Route::get('training_sessions', [TrainingSessionController::class,'index']);    //done
     Route::delete('training_sessions/{training_session}', [TrainingSessionController::class,'destroy']);
-    Route::post('/attended_sessions', [AttendedSessionController::class,'store']); //done
+    Route::post('/attended_sessions', [AttendedSessionController::class,'store'])->name('api.attended_sessions'); //done
     Route::get('/attended_sessions', [AttendedSessionController::class,'index']); //done
     Route::post('/attended_sessions/{attended_session}', [AttendedSessionController::class,'update']);
     Route::delete('/attended_sessions/{attended_session}', [AttendedSessionController::class,'destroy']);

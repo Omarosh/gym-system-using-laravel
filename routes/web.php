@@ -123,7 +123,9 @@ Route::get('/training_sessions/list', [App\Http\Controllers\TrainingSessionContr
 Route::get('/training_sessions/{training_session}', [App\Http\Controllers\TrainingSessionController::class, 'edit'])->name('trainingSessions.edit');
 Route::post('/training_sessions/delete', [App\Http\Controllers\TrainingSessionController::class, 'destroy'])->name('trainingSessions.delete');
 
+//attendance
 Route::get('/attendedtable', [App\Http\Controllers\Api\AttendedSessionController::class,'getAttendance'])->name('attendance.list');
 Route::get('/attendedview', [App\Http\Controllers\Api\AttendedSessionController::class,'view'])->name('attendance');
+Route::get('/create_attendance', [App\Http\Controllers\Api\AttendedSessionController::class,'create']);
 
 Auth::routes();
