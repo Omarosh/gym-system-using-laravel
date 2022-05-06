@@ -26,8 +26,7 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-    // return ("hola") ;
-    // $role = Role::create(['name' => 'admin']);
+    return redirect("home");
 });
 
 
