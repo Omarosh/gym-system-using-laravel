@@ -17,8 +17,14 @@
     <label for=" fname">Name :</label><br>
     <input type="text" id="name" value='{{$gym->name}}'name="name"><br><br>
     <label for="fname">City Name :</label><br>
-    <input type="text" id="city_name"  value='{{$gym->city_name}}' name="city_name"><br><br>
-    <label for="exampleFormControlTextarea1" class="form-label">Gym Cover :</label><br>
+    <select class="form-control" name="city_name">
+
+            @foreach ($cities as $item)
+                <option value="{{$item[1]}}">{{$item[1]}}</option>
+            @endforeach
+
+</select><br><br>    
+  <label for="exampleFormControlTextarea1" class="form-label">Gym Cover :</label><br>
     <input type="file" rows="3" id="exampleFormControlTextarea1" class="form-control" name="image" /><br><br>
     <input type="submit" value="Submit">
 </form>

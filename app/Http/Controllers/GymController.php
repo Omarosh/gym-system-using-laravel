@@ -15,8 +15,12 @@ class GymController extends Controller
 {
     public function create(Request $request)
     {
+        $cities = [];
+        foreach (CityManger::all() as $k) {
+            array_push($cities, [$k["id"] , $k["city_name"]]);
+        }
         
-        return view('gyms.create');
+        return view('gyms.create',['cities' => $cities]);
     }
     
     public function store(Request $request)
@@ -40,9 +44,13 @@ class GymController extends Controller
 
     public function edit(Request $request, $id)
     {
+        $cities = [];
+        foreach (CityManger::all() as $k) {
+            array_push($cities, [$k["id"] , $k["city_name"]]);
+        }
         $gym= Gym::where('id', $id)->first();
 
-        return view('gyms.edit_form', ['gym'=>$gym]);
+        return view('gyms.edit_form', ['gym'=>$gym,'cities' => $cities]);
     }
 
     public function update(Request $request, $id)
