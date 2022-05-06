@@ -2,36 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GymManger;
-use App\Models\Gym;
-use App\Models\Coach;
 use App\Models\User;
 use yajra\Datatables\Datatables;
 use App\Models\CityManger;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File; 
 
+use App\Http\Requests\StoreCityManagerRequest;
 
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
 
 class CityManagerController extends Controller
 {
-    public function store(Request $request)
+    public function store(StoreCityManagerRequest $request)
     {
         $request_out=$request->all();
-        
+
         $user=User::create([
             'name'=> $request_out['name'],
             'email'=> $request_out['email'],
-            'password' => $request_out['password']
+            'password' =>Hash::make($request_out['password'])
             
         ])->id;
+
+        $new_name=null;
+        if ($request['image']) {
+            $image = $request->file('image');
+            $new_name = rand() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('cityManagers_images'), $new_name);
+        }
+        
         $CityManger=CityManger::create([
             'user_id'=>$user,
             'city_name'=>$request_out["city_name"],
-            'national_id'=>$request_out["national_id"]
-            
+            'national_id'=>$request_out["national_id"],
+            'image_path'=> $new_name
         ]);
-        return view('city_manager.view');
+
+        $role_id = DB::table('roles')->where('name', 'city_manager')->value('id');
+        User::find($user)->roles()->sync($role_id) ;
+
+        return redirect('city_managers');
     }
 
     public function create(Request $request)
@@ -40,41 +54,67 @@ class CityManagerController extends Controller
     }
 
 
-    public function edit(Request $request, $id)
+    public function edit($user_id)
     {
-        return view('edit_city_manager_view', ['user_id' => $id]);
+        $manager= CityManger::where('user_id', $user_id)->first();
+
+        
+        return view('city_manager.edit_city_manager_view', ['manager' => $manager]);
     }
 
-    public function update(Request $request, $user_id)
+    public function update(StoreCityManagerRequest $request, $user_id)
     {
         $request_out=$request->all();
-        User::where('id', $user_id)->update([
-            'name'=>$request_out["name"],
-            'email'=>$request_out["email"],
-            'password'=>$request_out["password"]
-        ]);
-        CityManger::where("user_id", $user_id)->update([
+        if($request['image']){
+                $manager= CityManger::where('user_id', $user_id)->first();
+                File::delete(public_path('cityManagers_images/'.$manager['image_path'])); 
+                $image = $request->file('image');
+                $new_name = rand() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('cityManagers_images'), $new_name); 
+                User::where('id', $user_id)->update([
+                    'name'=>$request_out["name"],
+                    'email'=>$request_out["email"],
+                    'password'=>$request_out["password"]
+                ]);
+                CityManger::where("user_id", $user_id)->update([
+        
+                    'city_name'=>$request_out["city"],
+                    'national_id'=>$request_out["national_id"],
+                    'image_path'=>$new_name,
+                ]);
+        }else{
+            User::where('id', $user_id)->update([
+                'name'=>$request_out["name"],
+                'email'=>$request_out["email"],
+                'password'=>$request_out["password"]
+            ]);
+            CityManger::where("user_id", $user_id)->update([
+    
+                'city_name'=>$request_out["city"],
+                'national_id'=>$request_out["national_id"]
+            ]);
 
-            'city_name'=>$request_out["city"],
-            'national_id'=>$request_out["national_id"]
-        ]);
+        }
 
-        return view('city_manager.view');
+        
+     
+
+        return redirect('city_managers');
     }
 
     public function destroy(Request $request)
     {
         $request_out=$request->all();
-        $citymanager=CityManger::where("id", $request_out['user_id'])->first();
+        $cityManager=CityManger::where("id", $request_out['user_id'])->first();
 
         CityManger::where("id", $request_out['user_id'])->delete();
 
-        User::where('id', $citymanager['user_id'])->delete();
+        User::where('id', $cityManager['user_id'])->delete();
         return back();
     }
 
    
-    public function getCityManagers(Request $request)
+    public function getCityManagers()
     {
         $data = CityManger::all();
         return DataTables::of($data)
@@ -83,10 +123,14 @@ class CityManagerController extends Controller
         })
         -> make(true) ;
     }
-
+    public function view($cityManagerId)
+    {
+        $manager=CityManger::find($cityManagerId);
+        return view("city_manager.view_cityManager", ["manager"=>$manager]);
+    }
    
 
-    public function index(Request $request)
+    public function index()
     {
         return view('city_manager.view');
     }

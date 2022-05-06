@@ -13,7 +13,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('gyms', function (Blueprint $table) {
-            $table->foreignId("city_manger_id")->references("user_id")->on("city_mangers");
+            // $table->foreignId("city_manger_id")->references("user_id")->on("city_mangers");
         });
     }
 

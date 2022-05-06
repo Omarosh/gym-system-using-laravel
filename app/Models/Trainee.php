@@ -2,17 +2,35 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-class Trainee extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+ 
+use App\Models\Trainingpackege;
+class Trainee extends Authenticatable implements MustVerifyEmail
 {
-    protected $fillable = [
+    use HasApiTokens, HasFactory, Notifiable;
+
+    use HasFactory;
+    public $timestamps = false;
+
+    protected $fillable =[
         'name',
         'gender',
         'date_of_birth',
+        'imag_path',
         'email',
         'passwd',
+        // 'training_package_id',
     ];
-    use HasFactory;
+
+
+   public function trainingpackege(){
+       return $this->hasOne(Trainingpackege::class);
+   }
+
+
 }

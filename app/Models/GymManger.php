@@ -7,13 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class GymManger extends Model
 {
+    protected $attributes = [
+        'image_path' => 'default.jpg',
+    ];
     use HasFactory;
     protected $fillable = [
-     
         'city_name',
         'national_id',
         'gym_id',
-        'user_id'
+        'user_id',
+        'image_path'
         
     ];
 

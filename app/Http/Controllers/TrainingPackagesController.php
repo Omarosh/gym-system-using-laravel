@@ -23,24 +23,28 @@ class TrainingPackagesController extends Controller
             'num_of_sessions'=> $request_out['num_of_sessions'],
         ])->id;
         
-        return view('trainingPackages.view');
+        return redirect('training_packages');
     }
 
 
 
     public function edit(Request $request, $id)
     {
-        return view('edit_city_manager_view');
+        $package= TrainingPackage::where('id', $id)->first();
+
+        return view('trainingPackages.edit_form', ['package'=>$package]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $request_out=$request->all();
-        TrainingPackage::where('id', $request_out["id"])->update([
+        TrainingPackage::where('id', $id)->update([
             'name'=> $request_out['name'],
             'price'=> $request_out['price'],
             'num_of_sessions'=> $request_out['num_of_sessions'],
         ]);
+
+        return redirect('training_packages');
     }
 
     public function destroy(Request $request)
