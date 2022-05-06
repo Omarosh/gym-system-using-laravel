@@ -66,7 +66,8 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="{{ route('purchase_operations') }}" class="nav-link {{ Request::is('purchase_operations') ? 'active' : '' }}">
+    <a href="{{ route('purchase_operations') }}"
+        class="nav-link {{ Request::is('purchase_operations') ? 'active' : '' }}">
         <p>Purchase Operations</p>
     </a>
 </li>
