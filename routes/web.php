@@ -27,7 +27,7 @@ use App\Models\User;
 
 Route::get('/', function () {
     // return ("hola") ;
-    // $role = Role::create(['name' => 'gym_manager']);
+    // $role = Role::create(['name' => 'admin']);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
