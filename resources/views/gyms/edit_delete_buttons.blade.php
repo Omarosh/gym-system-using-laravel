@@ -43,7 +43,7 @@
                     _token: '{{csrf_token()}}'
                 },
                 success: function(data) {
-                    if (data = 'removed') {
+                    if (data == 'removed') {
                         e.parent("div").parent("td").parent("tr").remove()
                         console.log(data)
                     } else alert('has sessions')
