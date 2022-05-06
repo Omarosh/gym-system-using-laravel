@@ -53,12 +53,13 @@ Auth::routes(['verify' => true]);
 
 //code to verify the email 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    dd("hello");
     $request->fulfill();
     
-    return redirect('/home');
-})->middleware(['auth', 'sanctum'])->name('verification.verify');
+    // return redirect('/home');
+})->middleware(['auth:sanctum','verified']);//->name('verification.verify');
 
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:sanctum','verified'])->group(function () {
     Route::post('/training_packages', [TrainingPackageController::class,'store']);
     Route::get('/trainees/{trainee}', [TraineeController::class,'show']);
     Route::post('/training_sessions', [TrainingSessionController::class,'store']);
