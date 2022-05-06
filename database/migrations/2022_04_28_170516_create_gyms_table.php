@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::create('gyms', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('cover_image_path');
+            $table->string('cover_image_path')->nullable();
             $table->string('city_name');
             $table->timestamps();
         });

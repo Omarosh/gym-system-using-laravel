@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+@if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 <h1>Create Gym Manager</h1>
 <!-- <form method='POST' action="{{ route('city_manager.store')  }}"> -->
 <form method='POST'  enctype="multipart/form-data" action="{{ route('gym_manager.store')  }}">
@@ -8,7 +17,7 @@
     <label for=" fname">Email :</label><br>
     <input type="text" id="email" name="email"><br><br>
     <label for="lname">Password :</label><br>
-    <input type="text" id="password" name="password"><br><br>
+    <input type="password" id="password" name="password"><br><br>
     <label for="fname">Name :</label><br>
     <input type="text" id="name" name="name"><br><br>
     <label for="fname">City :</label><br>

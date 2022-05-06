@@ -6,6 +6,7 @@ use App\Models\CityManger;
 use App\Models\Coach;
 use Illuminate\Http\Request;
 use App\Models\Gym;
+use App\Models\TrainingSession;
 use App\Models\GymManger;
 use Illuminate\Support\Facades\File;
 use yajra\Datatables\Datatables;
@@ -26,7 +27,7 @@ class GymController extends Controller
             $image->move(public_path('gyms_images'), $new_name);
         }
         $request_out=$request->all();
-       // $citymanger=CityManger::where('city_name', $request_out['city_name'])->first();
+        // $citymanger=CityManger::where('city_name', $request_out['city_name'])->first();
         Gym::create([
             'name'=>$request_out['name'],
             'cover_image_path'=>$new_name,
@@ -38,28 +39,30 @@ class GymController extends Controller
 
     public function edit(Request $request, $id)
     {
-        return view('gyms.edit_form', ['id'=>$id]);
+        $gym= Gym::where('id', $id)->first();
+
+        return view('gyms.edit_form', ['gym'=>$gym]);
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         $request_out=$request->all();
         // $citymanger=CityManger::where('city_name',$request_out['city_name'])->first();
-        if($request['image']){
+        if ($request['image']) {
             $gym= Gym::find($id);
-            File::delete(public_path('gyms_images/'. $gym['cover_image_path'])); 
+            File::delete(public_path('gyms_images/'. $gym['cover_image_path']));
             $image = $request->file('image');
             $new_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('gyms_images'), $new_name); 
-            Gym::where('id',$id)->update([
+            $image->move(public_path('gyms_images'), $new_name);
+            Gym::where('id', $id)->update([
                 // 'city_manger_id'=>$citymanger->user_id,
                 'name'=>$request_out['name'],
                 'cover_image_path'=>$new_name,
                 'city_name'=> $request_out['city_name'],
 
             ]);
-        }else{
-            Gym::where('id',$id)->update([
+        } else {
+            Gym::where('id', $id)->update([
                 'name'=>$request_out['name'],
                 'city_name'=> $request_out['city_name'],
 
@@ -69,16 +72,19 @@ class GymController extends Controller
         return redirect('gyms');
     }
 
-    public function destroy(Request $request){
+    public function destroy(Request $request)
+    {
         $request_out=$request->all();
-        Gym::where("id",$request_out['id'] )->delete();
-        return back();
 
-        // Gym::where('id',$request['gym_id'])->delete();
-        // $gymmanger=GymManger::where('gym_id',$request['gym_id'])->first();
-        // GymManagerController::destroy($gymmanger->user_id);
-        // $coaches=Coach::where('gym_id',$request['gym_id'])->delete();
-        
+        $gym_has_sessions = TrainingSession::where('gym_id', '=', $request_out['id'])->first();
+
+        if ($gym_has_sessions === null) {
+            // sessions doesn't exist
+            Gym::where("id", $request_out['id'])->delete();
+            return ('removed');
+        } else {
+            return('doesnt removed');
+        }
     }
 
     public function allGyms()
@@ -106,8 +112,9 @@ class GymController extends Controller
     {
         return view('gyms.view');
     }
-    public function view($gymId){
+    public function view($gymId)
+    {
         $gym=Gym::find($gymId);
-        return view("gyms.view_gym",["gym"=>$gym]);
+        return view("gyms.view_gym", ["gym"=>$gym]);
     }
 }
