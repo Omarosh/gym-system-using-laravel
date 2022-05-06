@@ -32,7 +32,7 @@ Route::get('/', function () {
 
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth','banned'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::get('/gym_managers', [App\Http\Controllers\CityManagerController::class, 'index'])->name('gym_managers');
@@ -128,5 +128,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/attendedtable', [App\Http\Controllers\Api\AttendedSessionController::class,'getAttendance'])->name('attendance.list');
     Route::get('/attendedview', [App\Http\Controllers\Api\AttendedSessionController::class,'view'])->name('attendance');
 });
+
+
+
+Route::get('/bannedGymManager', function () {
+    return view('bannedGymManager');
+})->name('bannedGymManager');
 
 Auth::routes(['register'=>false]);
