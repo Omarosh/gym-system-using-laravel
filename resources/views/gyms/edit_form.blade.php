@@ -6,7 +6,13 @@
     @csrf
     @method('PUT')
 
-    <center><img src='/gyms_images/{{ $gym->cover_image_path }}' width=300 /></center>
+    @if( $gym->cover_image_path)
+          <center><img src='/gyms_images/{{ $gym->cover_image_path }}' width=300 /></center>
+
+          @else
+          <center><img src='/gyms_images/default.jpg' width=300 /></center>
+        
+          @endif
 
     <label for=" fname">Name :</label><br>
     <input type="text" id="name" value='{{$gym->name}}'name="name"><br><br>
