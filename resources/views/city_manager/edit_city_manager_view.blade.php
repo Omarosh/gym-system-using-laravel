@@ -23,7 +23,13 @@
 <form method='POST'  enctype="multipart/form-data" action="{{ route('city_manager.update',  $manager->user_id) }}">
     @csrf
     @method('PUT')
-    <center><img src='/cityManagers_images/{{ $manager->image_path }}' width=300 /></center>
+    @if( $manager->image_path)
+          <center><img src='/cityManagers_images/{{ $manager->image_path }}' width=300 /></center>
+          @else
+          <center><img src='/cityManagers_images/default.jpg' width=300 /></center>
+
+          @endif
+    
     <input type="text" id="user_id" value='{{$manager->user_id}}' name="id"><br><br>
     <label for=" fname">Email :</label><br>
     <input type="text" id="email" value='{{$manager->user->email}}' name="email"><br><br>

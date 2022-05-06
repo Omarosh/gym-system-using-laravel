@@ -5,6 +5,8 @@
 
 @if( $manager->image_path)
           <center><img src='/gymManagers_images/{{ $manager->image_path }}' width=300 /></center>
+          @else
+          <center><img src='/gymManagers_images/default.jpg' width=300 /></center>
           @endif
         
             <div class="mb-3">

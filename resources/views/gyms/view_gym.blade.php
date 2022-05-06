@@ -3,8 +3,12 @@
 
 @section('content')
 
-@if( $gym->cover_image_path)
+        @if( $gym->cover_image_path)
           <center><img src='/gyms_images/{{ $gym->cover_image_path }}' width=300 /></center>
+
+          @else
+          <center><img src='/gyms_images/default.jpg' width=300 /></center>
+        
           @endif
         
             <div class="mb-3">
