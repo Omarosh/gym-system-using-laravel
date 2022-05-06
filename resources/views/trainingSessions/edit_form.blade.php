@@ -13,12 +13,26 @@
                 <option value="{{$item[0]}}">{{$item[1]}}</option>
             @endforeach
 
-</select><br><br>     <label for="fname">Coach ID :</label><br>
-    <input type="text" id="coach_id" name="coach_id"><br><br>
-    <label for="fname">Starts At:</label><br>
+</select><br><br>     <label for="fname">Coach:</label><br>
+<select class="form-control" name="coach_id">
+
+            @foreach ($coaches as $item)
+                <option value="{{$item[0]}}">{{$item[1]}}</option>
+            @endforeach
+
+</select><br><br>    
+ <label for="fname">Starts At:</label><br>
     <input type="datetime-local" name="starts_at"><br><br>
     <label for="fname">Ends At:</label><br>
     <input type="datetime-local" name="finishes_at"><br><br>
     <input type="submit" value="Submit">
 </form>
+
+<script>
+    var msg = '{{Session::get('alert')}}';
+    var exist = '{{Session::has('alert')}}';
+    if(exist){
+      alert(msg);
+    }
+</script>
 @endsection
