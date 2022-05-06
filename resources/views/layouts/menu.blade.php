@@ -5,7 +5,7 @@
         <p>Home</p>
     </a>
 </li>
-@hasanyrole('city_manager|admin')
+@hasanyrole('admin')
 <li class="nav-item">
     <a href="{{ route('city_managers') }}" class="nav-link {{ Request::is('city_managers') ? 'active' : '' }}">
         <!-- <i class="nav-icon fas fa-home"></i> -->
@@ -29,6 +29,7 @@
         <p>Training Sessions</p>
     </a>
 </li>
+
 @hasanyrole('city_manager|admin')
 <li class="nav-item">
     <a href="{{ route('gyms') }}" class="nav-link {{ Request::is('gyms') ? 'active' : '' }}">
