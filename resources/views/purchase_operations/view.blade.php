@@ -68,7 +68,7 @@
                     "data": "traineeemail",
                 },
                 {
-                    "data": "packegename"
+                    "data": "packagename"
                 },
                 {
                     "data": "price",

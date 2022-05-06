@@ -27,17 +27,16 @@ class PurchaseOperation extends Model
 
     public function training_package()
     {
-        return $this->belongsTo(Trainingpackege::class,'package_id');
+        return $this->belongsTo(TrainingPackage::class, 'package_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class,'created_by_id');
+        return $this->belongsTo(User::class, 'created_by_id');
     }
 
     public function trainee()
     {
         return $this->belongsTo(Trainee::class);
     }
-
 }

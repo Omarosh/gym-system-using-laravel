@@ -35,14 +35,6 @@
         <p>Gyms</p>
     </a>
 </li>
-<li class="nav-item">
-    <a href="{{ route('purchase_operations') }}" class="nav-link {{ Request::is('purchase_operations') ? 'active' : '' }}">
-        <p>Purchase Operations</p>
-    </a>
-</li>
-<li class="nav-item">
-    <a href="{{ route('stripe-payment') }}" class="nav-link {{ Request::is('stripe-payment') ? 'active' : '' }}">
-        <p>Buy Package</p>
 @endhasanyrole
 
 <li class="nav-item">
@@ -68,5 +60,15 @@
 <li class="nav-item">
     <a href="{{ route('attendance') }}" class="nav-link {{ Request::is('attendance') ? 'active' : '' }}">
         <p>Attendance</p>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{{ route('purchase_operations') }}" class="nav-link {{ Request::is('purchase_operations') ? 'active' : '' }}">
+        <p>Purchase Operations</p>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{{ route('stripe-payment') }}" class="nav-link {{ Request::is('stripe-payment') ? 'active' : '' }}">
+        <p>Buy Package</p>
     </a>
 </li>

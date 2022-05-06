@@ -15,7 +15,7 @@ use App\Http\Controllers\Api\TrainingPackageController;
 use App\Http\Controllers\Api\TrainingSessionController;
 use App\Http\Controllers\Api\AttendedSessionController;
 use App\Models\Trainee;
-use App\Models\Trainingpackege;
+use App\Models\TrainingPackage;
 use Illuminate\Support\Facades\Hash;
 
 /*

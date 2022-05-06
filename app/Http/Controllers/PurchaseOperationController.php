@@ -24,7 +24,7 @@ class PurchaseOperationController extends Controller
             ->addColumn('traineeemail', function ($operation) {
                 return $operation->trainee->email;
             })
-            ->addColumn('packegename', function ($operation) {
+            ->addColumn('packagename', function ($operation) {
                 return $operation->training_package->name ?? 'None';
             })
             ->addColumn('gym', function ($operation) {
