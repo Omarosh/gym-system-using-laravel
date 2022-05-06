@@ -26,7 +26,12 @@
     @method('PUT')
     <input type="text" id="user_id" value='{{$manager->user_id}}' name="id"><br><br>
 
-    <center><img src='/gymManagers_images/{{ $manager->image_path }}' width=300 /></center>
+    
+@if( $manager->image_path)
+          <center><img src='/gymManagers_images/{{ $manager->image_path }}' width=300 /></center>
+          @else
+          <center><img src='/gymManagers_images/default.jpg' width=300 /></center>
+          @endif
 
     <label for=" fname">Email :</label><br>
     <input type="text" id="email" value='{{$manager->user->email}}' name="email"><br><br>

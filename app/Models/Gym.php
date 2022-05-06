@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Gym extends Model
 {
+    protected $attributes = [
+        'cover_image_path' => 'default.jpg',
+    ];
     use HasFactory;
     protected $fillable = [
         'name',

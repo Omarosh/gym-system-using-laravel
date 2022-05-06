@@ -5,6 +5,9 @@
 
 @if( $manager->image_path)
           <center><img src='/cityManagers_images/{{ $manager->image_path }}' width=300 /></center>
+          @else
+          <center><img src='/cityManagers_images/default.jpg' width=300 /></center>
+
           @endif
         
             <div class="mb-3">
