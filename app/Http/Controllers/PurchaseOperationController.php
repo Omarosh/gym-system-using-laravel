@@ -39,10 +39,7 @@ class PurchaseOperationController extends Controller
             ->make(true);
     }
 
-    public function payment_success(Request $request)
-    {
-        return view('purchase_operations.view', ['success' => 'success']);
-    }
+   
 
     public function index(Request $request)
     {
@@ -54,10 +51,7 @@ class PurchaseOperationController extends Controller
         ]);
     }
    
-    public function buy_package()
-    {
-        return view('purchase_operations.buy_package');
-    }
+    
 
     public function totalRevenue()
     {
