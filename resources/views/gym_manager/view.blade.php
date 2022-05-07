@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('content')    
+@section('content')
+@hasanyrole('city_manager|admin')
 
 <div class="container">
     <h2>Gym Managers Table</h2>
@@ -71,6 +72,7 @@
     });
 </script>
 
+@endhasanyrole
 
 @endsection
 @section('third_party_scripts')

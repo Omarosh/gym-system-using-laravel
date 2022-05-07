@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
+
 @section('content')
+@hasanyrole('city_manager|admin')
 @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -42,4 +44,6 @@
 
     <input type="submit" value="Submit">
 </form>
+@endhasanyrole
+
 @endsection
