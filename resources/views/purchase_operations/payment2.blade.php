@@ -71,10 +71,16 @@
                                 <label for="gym_id" class='control-label'>gym_id :</label>
                                 {{-- <input class="form-control" type="text" id="gym_id" name="gym_id"> --}}
                                 <select class="form-control" id="gym_id" name="gym_id">
-    
-                                    @foreach ($gyms as $item)
-                                        <option value="{{$item[0]}}">{{$item[1]}} - {{$item[2]}}</option>
-                                    @endforeach
+                                    @if($gym_flag === "NO")
+                                        @foreach ($gyms as $item)
+                                            <option value="{{$item[0]}}" >{{$item[1]}} - {{$item[2]}}</option>
+                                        @endforeach
+                                    @endif
+                                    @if($gym_flag === "YES")
+                                        
+                                        <option value="{{$gyms[0]}}" >{{$gyms[1]}} - {{$gyms[2]}}</option>
+                                        
+                                    @endif
             
                                 </select>
                             </div>

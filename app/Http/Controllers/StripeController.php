@@ -8,6 +8,7 @@ use Stripe;
 use App\Models\PurchaseOperation;
 use App\Models\TrainingPackage;
 use App\Models\Gym;
+use App\Models\GymManger;
 use App\Models\Trainee;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,11 +20,23 @@ class StripeController extends Controller
         foreach (TrainingPackage::all() as $k) {
             array_push($packages, [$k["id"] , $k["name"] , $k["price"],$k["num_of_sessions"]]);
         }
+
+        $gym_man = GymManger::where('user_id', Auth::id())->first();
         $gyms = [];
-        foreach (Gym::all() as $k) {
-            array_push($gyms, [$k["id"] , $k["name"], $k["city_name"]]);
+        $gymFlag = "YES";
+        if ($gym_man !== null) {
+            $my_gym = Gym::where("id", "=", $gym_man->gym_id)->first();
+            
+            $gyms =  array($my_gym->id, $my_gym->name, $my_gym->city_name) ;
+        // dd($gyms);
+        } else {
+            foreach (Gym::all() as $k) {
+                array_push($gyms, [$k["id"] , $k["name"], $k["city_name"]]);
+            }
+            $gymFlag ="NO";
         }
-        return view('purchase_operations.payment2', ['packages' => $packages, 'gyms' => $gyms]);
+        
+        return view('purchase_operations.payment2', ['packages' => $packages, 'gyms' => $gyms, 'gym_flag' => $gymFlag]);
     }
   
     public function handlePost2(Request $request)
