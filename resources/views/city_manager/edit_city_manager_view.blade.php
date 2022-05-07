@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@hasanyrole('admin')
 @if ($errors->any())
 <div class="alert alert-danger">
     <ul>
@@ -46,5 +47,5 @@
     <input type="file" rows="3" id="exampleFormControlTextarea1" class="form-control" name="image" /><br><br>
     <input type="submit" value="Submit">
 </form>
-
+@endhasanyrole
 @endsection
