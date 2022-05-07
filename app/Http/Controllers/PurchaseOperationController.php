@@ -54,8 +54,6 @@ class PurchaseOperationController extends Controller
             }
         }
         
-        
-
         $gym_man = GymManger::where('user_id', Auth::id())->first();
         $total_gym = "nope";
         if ($gym_man !== null) {
@@ -69,9 +67,8 @@ class PurchaseOperationController extends Controller
         $data = [
             "city" => $total_city,
             "gym" => $total_gym,
-            "admin" => $total_gym,
+            "admin" => $total_admin,
         ];
-        dd($data);
         return view('purchase_operations.view', $data);
     }
    
