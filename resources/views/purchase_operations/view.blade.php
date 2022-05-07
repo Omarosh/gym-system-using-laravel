@@ -13,9 +13,20 @@
 
 @section('content')
 
-    @if($gym!=="nope")
-        <div class="container">
-        <h2>Purchase Operations</h2>
+    
+    <div class="container">
+    <h2>Purchase Operations</h2>
+        @if($admin!=="nope")
+        <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">The total revenue of All gyms</span>
+                <span class="info-box-number">{{price($admin)}}$</span>
+                <span class="info-box-number"></span>
+            </div>
+        </div>
+          @endif
+        @if($gym!=="nope")
         <div class="info-box">
             <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
             <div class="info-box-content">
@@ -24,16 +35,16 @@
                 <span class="info-box-number"></span>
             </div>
         </div>
-    @endif
-    @if($city!=="nope")
-     <div class="info-box">
-        <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
-        <div class="info-box-content">
-            <span class="info-box-text">the total revenue of my city</span>
-            <span class="info-box-number">{{price($city)}}$</span>
+          @endif
+        @if($city!=="nope")
+        <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">the total revenue of my city</span>
+                <span class="info-box-number">{{price($city)}}$</span>
+            </div>
         </div>
-    </div>
-    @endif
+        @endif
     @if(Session::has("success"))
 <div class="container my-5">
     <div class="row my-5">

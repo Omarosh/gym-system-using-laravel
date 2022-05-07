@@ -59,14 +59,20 @@ class PurchaseOperationController extends Controller
         $gym_man = GymManger::where('user_id', Auth::id())->first();
         $total_gym = "nope";
         if ($gym_man !== null) {
-            // dd($gym_man);
             $gym_id = $gym_man->gym_id;
             $total_gym = PurchaseOperation::where('gym_id', $gym_id)->sum('price');
         }
-        return view('purchase_operations.view', [
+        $total_admin = "nope";
+        if ($total_city === "nope" && $total_gym === "nope") {
+            $total_admin = PurchaseOperation::all()->sum('price');
+        }
+        $data = [
             "city" => $total_city,
             "gym" => $total_gym,
-        ]);
+            "admin" => $total_gym,
+        ];
+        dd($data);
+        return view('purchase_operations.view', $data);
     }
    
     
