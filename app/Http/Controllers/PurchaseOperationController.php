@@ -43,12 +43,29 @@ class PurchaseOperationController extends Controller
 
     public function index(Request $request)
     {
-        // $cc = CityManger::where("user_id", Auth::id())->first()->id ;
-        // $gymId = Gym::where('city_manger_id', $cc)->first()->id;
-        // $city = PurchaseOperation::where('gym_id', $gymId)->sum('price');
+        $cc = CityManger::where("user_id", Auth::id())->first();
+        $total_city = "nope";
+        if ($cc !== null) {
+            $city = $cc->city_name;
+            $gymId = Gym::where('city_name', "=", $city)->get();
+            $total_city = 0;
+            foreach ($gymId as $key => $value) {
+                $total_city += PurchaseOperation::where('gym_id', $value->id)->sum('price');
+            }
+        }
+        
+        
 
+        $gym_man = GymManger::where('user_id', Auth::id())->first();
+        $total_gym = "nope";
+        if ($gym_man !== null) {
+            // dd($gym_man);
+            $gym_id = $gym_man->gym_id;
+            $total_gym = PurchaseOperation::where('gym_id', $gym_id)->sum('price');
+        }
         return view('purchase_operations.view', [
-            "city" => "Alex"
+            "city" => $total_city,
+            "gym" => $total_gym,
         ]);
     }
    

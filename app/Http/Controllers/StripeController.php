@@ -58,8 +58,12 @@ class StripeController extends Controller
                         'price'=>$packagePrice,
                       ])->id;
                     Session::flash('success', 'Payment has been successfully processed.');
-                    $trn = $trn->email;
-                    return redirect()->route('purchase_operations')->with('success', "Payment was successful for $trn") ;
+                    $trn->remaining_session += TrainingPackage::find($input["package_id"])->num_of_sessions;
+                    $trn->save();
+
+                    $trn_email = $trn->email;
+                    $trn_sessions = $trn -> remaining_session;
+                    return redirect()->route('purchase_operations')->with('success', "Payment was successful for $trn_email - Remaining Sessions:( $trn_sessions)") ;
                 } catch (\Throwable $th) {
                     error_log($th);
                     Session::flash('fail', 'Fatal DB Error - Invalid Trainee Data');
