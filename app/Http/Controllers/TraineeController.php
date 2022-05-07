@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use yajra\Datatables\Datatables;
 use App\Models\Trainee;
 
-
 class TraineeController extends Controller
 {
     public function store(Request $request)
@@ -17,7 +16,6 @@ class TraineeController extends Controller
             'name'=> $request_out['name'],
             'gender'=> $request_out['gender'],
             'date_of_birth'=> $request_out['date_of_birth'],
-            // 'imag_path'=> $request_out['imag_path'],
             'email'=> $request_out['email'],
             'password' => $request_out['password']
         ])->id;
@@ -36,7 +34,6 @@ class TraineeController extends Controller
             'name'=> $request_out['name'],
             'gender'=> $request_out['gender'],
             'date_of_birth'=> $request_out['date_of_birth'],
-            // 'imag_path'=> $request_out['imag_path'],
             'email'=> $request_out['email'],
             'passwd' => $request_out['password']
         ]);
@@ -46,7 +43,7 @@ class TraineeController extends Controller
     public function destroy(Request $request)
     {
         $request_out=$request->all();
-        Trainee::where("id",$request_out['id'] )->delete();
+        Trainee::where("id", $request_out['id'])->delete();
         return back();
     }
 

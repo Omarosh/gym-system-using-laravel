@@ -16,7 +16,6 @@ use App\Notifications\verifiedTrainee;
 use Illuminate\Validation\ValidationException;
 use App\Models\TrainingPackage;
 
-
 class TraineeController extends Controller
 {
     
@@ -29,7 +28,6 @@ class TraineeController extends Controller
     {
         //
         return "hello";
-        
     }
 
     /**
@@ -48,23 +46,22 @@ class TraineeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTraineeRequest $request )//,Request $request,)
+    public function store(StoreTraineeRequest $request)//,Request $request,)
     {
-        if ($request->passwd === $request->passwd_confirmation)
-        {
-            $fileInRequest = $request->file('image'); 
+        if ($request->passwd === $request->passwd_confirmation) {
+            $fileInRequest = $request->file('image');
             $request->merge(['imag_path' => $fileInRequest]);
             $request['passwd'] = Hash::make($request['passwd']);
             $trainee = Trainee::create($request->all());
             event(new Registered($trainee));
             $trainee->notify(new verifiedTrainee());   //send greeting notification this is needed to be done after verification
-        }
-        else {
-            return "password and password_confirmation are not identical"; 
+        } else {
+            return "password and password_confirmation are not identical";
         }
     }
 
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         $request->validate([
             'email' => 'required|email',
             'passwd' => 'required',
@@ -84,22 +81,6 @@ class TraineeController extends Controller
 
         $token = $user->createToken($request->device_name)->plainTextToken;
         return ["user info"=> new TraineeResource($user),"token"=>$token];
-       
-        //Here is post method of meha
-        // // $trainee = Trainee::create(['name','gender','date_of_birth','the path','email','passwd']);
-        // $request['passwd'] = Hash::make($request['passwd']);
-        // // dd($request->all());
-        // $trainee = Trainee::create([
-        //     'name'=>$request['name'],
-        //     'gender'=>$request['gender'],
-        //     'date_of_birth'=>$request['date_of_birth'],
-        //     'imag_path'=>$request['imag_path'],
-        //     'email'=>$request['email'],
-        //     'passwd'=>$request['passwd'],
-        //     'training_package_id'=>$request['training_package_id']
-        // ]);
-        // // event(new Registered($trainee));
-        // return $trainee;
     }
 
     /**
@@ -110,10 +91,7 @@ class TraineeController extends Controller
      */
     public function show($id)
     {
-
-        
         $trainee=Trainee::find($id);
-        // dd($trainee->name);
         return $trainee;
     }
 
@@ -126,7 +104,6 @@ class TraineeController extends Controller
     public function edit($id)
     {
         //
-
     }
 
     /**
@@ -138,10 +115,10 @@ class TraineeController extends Controller
      */
     public function update(StoreTraineeRequest $request)
     {
-        $fileInRequest = $request->file('image'); 
+        $fileInRequest = $request->file('image');
         $request->merge(['imag_path' => $fileInRequest]);
         $request['passwd'] = Hash::make($request['passwd']);
-        Trainee::where('id',$request->id)
+        Trainee::where('id', $request->id)
         ->update([
           'name'=>$request->name,
           'gender'=>$request->gender,
@@ -162,36 +139,29 @@ class TraineeController extends Controller
     {
         //
     }
-    public function show_trainee_sessions($id){
-       $trainee_package_id=Trainee::find($id)->training_package_id;
-       $package = TrainingPackage::find($trainee_package_id);
-       if ($package == null) {return "you haven't buyed a package yet";}
-       $training_package_sessions=$package->num_of_sessions;
-       $attended_sessions_arr=AttendedSession::where('trainee_id',$id);
-       $attended_sessions_num=$attended_sessions_arr->count();
-       $remaining_sessions=$training_package_sessions-$attended_sessions_num;
+    public function show_trainee_sessions($id)
+    {
+        $trainee_package_id=Trainee::find($id)->training_package_id;
+        $package = TrainingPackage::find($trainee_package_id);
+        if ($package == null) {
+            return "you haven't buyed a package yet";
+        }
+        $training_package_sessions=$package->num_of_sessions;
+        $attended_sessions_arr=AttendedSession::where('trainee_id', $id);
+        $attended_sessions_num=$attended_sessions_arr->count();
+        $remaining_sessions=$training_package_sessions-$attended_sessions_num;
     
-    $obj=['training_package_sessions'=>   $training_package_sessions,
+        $obj=['training_package_sessions'=>   $training_package_sessions,
 
           'remaining_sessions'=>$remaining_sessions
         
     ];
-      return $obj;
-
-    
-
+        return $obj;
     }
-    public function show_trainee_history($id){
-
-        //training session name -> training sessions ->name
-        //gym name -> gym id from training sessions->get gym name from gyms by id
-        //attendance date-> created at in attended_sessions    done
-        //attendance time -> created at in attended_sessions   done
-
-        $attended_sessions=AttendedSession::with('session')->where('trainee_id',$id)->get();
+    public function show_trainee_history($id)
+    {
+        $attended_sessions=AttendedSession::with('session')->where('trainee_id', $id)->get();
         
         return AttendedSessionResource::collection($attended_sessions);
-        
-
     }
 }

@@ -17,10 +17,7 @@ class AttendedSessionController extends Controller
         $session = TrainingSession::find($request['training_session_id']);
         $date = explode(" ", $session->starts_at);
         $remaining_sessions = Trainee::find($request['trainee_id'])->remaining_session;
-        // error_log("=====================");
-        // error_log($remaining_sessions);
-        // error_log(json_encode($request->all()));
-        // die;
+        
         $trn = Trainee::find($request['trainee_id']);
         $email = $trn->email;
         $sname = $session->name;
@@ -49,7 +46,6 @@ class AttendedSessionController extends Controller
         } else {
             $message =  "you can only attend in session's day";
         }
-        // return view('attendance.view', ["message"=>$message]);
         return redirect()->route('attendance')->with('message', $message) ;
     }
     public function store(Request $request)
@@ -57,10 +53,7 @@ class AttendedSessionController extends Controller
         $session = TrainingSession::find($request['training_session_id']);
         $date = explode(" ", $session->starts_at);
         $remaining_sessions = Trainee::find($request['trainee_id'])->remaining_session;
-        // error_log("=====================");
-        // error_log($remaining_sessions);
-        // error_log(json_encode($request->all()));
-        // die;
+       
         $trn = Trainee::find($request['trainee_id']);
         $email = $trn->email;
         $sname = $session->name;

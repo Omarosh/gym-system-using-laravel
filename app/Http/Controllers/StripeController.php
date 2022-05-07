@@ -30,7 +30,6 @@ class StripeController extends Controller
     {
         \Stripe\Stripe::setApiKey('sk_test_51KvM1uKyzqgHTfADBaOGi0FtjuZ9vq9OH8e7paXnv2cyswX3u2XmbnMgjiKVxxBkmx15hgqFyb80eSFxc7mEohSr00DjK2ePO4');
         
-        // error_log(json_encode($request->all()));
         $input = $request->all();
         $trn = Trainee::where('email', '=', $input["trainee_email"])->first();
         $packagePrice = TrainingPackage::find($input["package_id"])->price;
