@@ -57,7 +57,6 @@ class TraineeController extends Controller
             $request['passwd'] = Hash::make($request['passwd']);
             $trainee = Trainee::create($request->all());
             event(new Registered($trainee));
-            $trainee->notify(new verifiedTrainee());   //send greeting notification this is needed to be done after verification
         }
         else {
             return "password and password_confirmation are not identical"; 
@@ -85,21 +84,7 @@ class TraineeController extends Controller
         $token = $user->createToken($request->device_name)->plainTextToken;
         return ["user info"=> new TraineeResource($user),"token"=>$token];
        
-        //Here is post method of meha
-        // // $trainee = Trainee::create(['name','gender','date_of_birth','the path','email','passwd']);
-        // $request['passwd'] = Hash::make($request['passwd']);
-        // // dd($request->all());
-        // $trainee = Trainee::create([
-        //     'name'=>$request['name'],
-        //     'gender'=>$request['gender'],
-        //     'date_of_birth'=>$request['date_of_birth'],
-        //     'imag_path'=>$request['imag_path'],
-        //     'email'=>$request['email'],
-        //     'passwd'=>$request['passwd'],
-        //     'training_package_id'=>$request['training_package_id']
-        // ]);
-        // // event(new Registered($trainee));
-        // return $trainee;
+       
     }
 
     /**

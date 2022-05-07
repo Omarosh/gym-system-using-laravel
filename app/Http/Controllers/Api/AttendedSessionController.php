@@ -18,11 +18,11 @@ class AttendedSessionController extends Controller
         $session= TrainingSession::find($request['training_session_id']);
      
         $date=explode(" ",$session->starts_at);
-     $trainee_package_id=Trainee::find($request['trainee_id'])->training_package_id;
-     $package_session_num= TrainingPackage::find($trainee_package_id)->num_of_sessions;
+    //  $trainee_package_id=Trainee::find($request['trainee_id'])->training_package_id;
+    //  $package_session_num= TrainingPackage::find($trainee_package_id)->num_of_sessions;
   
-      $sessions_attended_arr= AttendedSession::where('trainee_id',$request['trainee_id']);
-       $sessions_attended=$sessions_attended_arr->count();
+    //   $sessions_attended_arr= AttendedSession::where('trainee_id',$request['trainee_id']);
+    //    $sessions_attended=$sessions_attended_arr->count();
      
      $today_date=explode(" ",today());
  
