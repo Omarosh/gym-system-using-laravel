@@ -1,6 +1,18 @@
+<?php function price($price){
+    if(strlen($price)>=3){
+        return substr_replace($price, ".", 2, 0);
+    }else if(strlen($price)==2){
+        return '0.'.$price;
+    }else if(strlen($price)==1){
+        return '0.0'.$price;
+    }else{
+        return "???";
+    }
+    } ?>
 @extends('layouts.app')
 
 @section('content')
+
     @if($gym!=="nope")
         <div class="container">
         <h2>Purchase Operations</h2>
@@ -8,7 +20,7 @@
             <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">the total revenue of my gym</span>
-                <span class="info-box-number">{{$gym}}</span>
+                <span class="info-box-number">{{price($gym)}}$</span>
                 <span class="info-box-number"></span>
             </div>
         </div>
@@ -18,7 +30,7 @@
         <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
         <div class="info-box-content">
             <span class="info-box-text">the total revenue of my city</span>
-            <span class="info-box-number">{{$city}}</span>
+            <span class="info-box-number">{{price($city)}}$</span>
         </div>
     </div>
     @endif
@@ -37,7 +49,7 @@
                 <th>Trainee Name</th>
                 <th>Trainee Email</th>
                 <th>package name</th>
-                <th>amount the user bought</th>
+                <th>Price (in cents)</th>
                 <th>Gym</th>
                 <th>City</th>
                 <th>Created By</th>

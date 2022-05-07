@@ -32,7 +32,7 @@ Route::get('/', function () {
 
 
 
-Route::middleware(['auth','banned'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::get('/gym_managers', [App\Http\Controllers\CityManagerController::class, 'index'])->name('gym_managers');
