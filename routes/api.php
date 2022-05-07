@@ -43,7 +43,6 @@ Route::get('/coaches/{coach}', [CoachController::class,'show']);
 Route::post('/coaches', [CoachController::class,'store']);
 Route::post('/coaches/{coach}', [CoachController::class,'update']);
 Route::delete('/coaches/{coach}', [CoachController::class,'destroy']);
-//Route::post('/citymanager', [CityMangerController::class,'store'])->name("citymanger.store");
 Route::post('/', [GymController::class,'update'])->name("citymanger.store");
 
 Route::post('/payment', [StripeController::class, 'handlePost'])->name('stripe.payment');
@@ -59,7 +58,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     $request->fulfill();
     
     return redirect('/home');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+})->middleware(['auth'])->name('verification.verify');
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/training_packages', [TrainingPackageController::class,'store']);
