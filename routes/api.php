@@ -7,13 +7,15 @@ use App\Http\Controllers\CityMangerController;
 use App\Http\Controllers\CoachController;
 use App\Http\Controllers\GymManagerController;
 use App\Http\Controllers\GymController;
+use App\Http\Controllers\StripeController;
+
 use App\Http\Controllers\Api\TraineeController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\Api\TrainingPackageController;
 use App\Http\Controllers\Api\TrainingSessionController;
 use App\Http\Controllers\Api\AttendedSessionController;
 use App\Models\Trainee;
-use App\Models\Trainingpackege;
+use App\Models\TrainingPackage;
 use App\Notifications\verifiedTrainee;
 use Illuminate\Support\Facades\Hash;
 
@@ -32,19 +34,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/citymanager', [CityMangerController::class,'store'])->name("citymanger.store");
-Route::post('/gymmanagers',[GymManagerController::class,'store']);
-Route::delete('/gymmanagers/{gymmanager}',[GymManagerController::class,'destroy']);
-Route::get('/gymmanagers',[GymManagerController::class,'index']);
-Route::get('/gymmanagers/{gymmanager}',[GymManagerController::class,'show']);
-Route::post('/gymmanagers/{gymmanager}',[GymManagerController::class,'update']);
-Route::get('/coaches',[CoachController::class,'index']);
-Route::get('/coaches/{coach}',[CoachController::class,'show']);
-Route::post('/coaches',[CoachController::class,'store']);
-Route::post('/coaches/{coach}',[CoachController::class,'update']);
-Route::delete('/coaches/{coach}',[CoachController::class,'destroy']);
-//Route::post('/citymanager', [CityMangerController::class,'store'])->name("citymanger.store");
+Route::post('/gymmanagers', [GymManagerController::class,'store']);
+Route::delete('/gymmanagers/{gymmanager}', [GymManagerController::class,'destroy']);
+Route::get('/gymmanagers', [GymManagerController::class,'index']);
+Route::get('/gymmanagers/{gymmanager}', [GymManagerController::class,'show']);
+Route::post('/gymmanagers/{gymmanager}', [GymManagerController::class,'update']);
+Route::get('/coaches', [CoachController::class,'index']);
+Route::get('/coaches/{coach}', [CoachController::class,'show']);
+Route::post('/coaches', [CoachController::class,'store']);
+Route::post('/coaches/{coach}', [CoachController::class,'update']);
+Route::delete('/coaches/{coach}', [CoachController::class,'destroy']);
 Route::post('/', [GymController::class,'update'])->name("citymanger.store");
 
+Route::post('/payment', [StripeController::class, 'handlePost'])->name('stripe.payment');
 
 Route::post('/signup',[TraineeController::class,'store']);
 Route::post('/trainee/login',[TraineeController::class,'login']); 
@@ -67,7 +69,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('training_sessions/{training_session}', [TrainingSessionController::class,'update']);
     Route::get('training_sessions', [TrainingSessionController::class,'index']);    //done
     Route::delete('training_sessions/{training_session}', [TrainingSessionController::class,'destroy']);
-    Route::post('/attended_sessions', [AttendedSessionController::class,'store']); //done
+    Route::post('/attended_sessions', [AttendedSessionController::class,'store'])->name('api.attended_sessions');
+    ; //done
     Route::get('/attended_sessions', [AttendedSessionController::class,'index']); //done
     Route::post('/attended_sessions/{attended_session}', [AttendedSessionController::class,'update']);
     Route::delete('/attended_sessions/{attended_session}', [AttendedSessionController::class,'destroy']);

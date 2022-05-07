@@ -20,7 +20,6 @@
 
     function deleteSession(e){
         $(()=>{
-            e.parent("div").parent("td").parent("tr").remove()
         let id=Number( e.parent("div").parent("td").siblings("td").html())
         console.log(id);
             $.ajax({
@@ -28,8 +27,10 @@
                 url: '/training_sessions/delete',
                 data: { id: id, _token: '{{csrf_token()}}' },
                 success: function (data) {
-                console.log(data);
-                },
+                    if (data == 'removed') {
+                        e.parent("div").parent("td").parent("tr").remove()
+                        console.log(data)
+                    } else alert('That session already had trainees')},
                 error: function (data, textStatus, errorThrown) {
                     console.log(data);
             

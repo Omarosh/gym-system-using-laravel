@@ -15,17 +15,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css " rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-    {{-- <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script> --}}
-
-
-    <!-- <script script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js" defer></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" defer></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js" defer></script>
-    <script type="text/javascript"></script> -->
 
     @yield('third_party_stylesheets')
 
@@ -43,10 +32,11 @@
                 </li>
             </ul>
 
+            @hasanyrole('admin')
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                        <img src="https://assets.infyom.com/logo/blue_logo_150x150.png"
+                        <img src="gyms_images/390158429.jpg"
                             class="user-image img-circle elevation-2" alt="User Image">
                         @if(Auth::user())
 
@@ -56,7 +46,7 @@
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <!-- User image -->
                         <li class="user-header bg-primary">
-                            <img src="https://assets.infyom.com/logo/blue_logo_150x150.png"
+                            <img src="gyms_images/390158429.jpg"
                                 class="img-circle elevation-2" alt="User Image">
                             <p>
                                 {{ Auth::user()->name }}
@@ -77,6 +67,95 @@
                     </ul>
                 </li>
             </ul>
+            @endhasanyrole
+
+            @hasanyrole('city_manager')
+            <div style="display: none">
+                {{$user_id = Auth::user()->id}}
+                {{$image = App\Models\CityManger::where('user_id',$user_id)->first()['image_path']}}
+                @if(!$image)
+                    {{$image = 'default.jpg'}}
+                @endif
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown user-menu">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                        <img src="cityManagers_images/{{$image}}"
+                            class="user-image img-circle elevation-2" alt="User Image">
+                        @if(Auth::user())
+
+                        <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
+                        @endif
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <!-- User image -->
+                        <li class="user-header bg-primary">
+                            <img src="cityManagers_images/{{$image}}"
+                                class="img-circle elevation-2" alt="User Image">
+                            <p>
+                                {{ Auth::user()->name }}
+                                <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
+                            </p>
+                        </li>
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                            <a href="#" class="btn btn-default btn-flat float-right"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Sign out
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            @endhasanyrole
+
+            @hasanyrole('gym_manager')
+            <div style="display: none">
+                {{$user_id = Auth::user()->id}}
+                {{$image = App\Models\GymManger::where('user_id',$user_id)->first()['image_path']}}
+                @if(!$image)
+                    {{$image = 'default.jpg'}}
+                @endif
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown user-menu">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                        <img src="gymManagers_images/{{$image}}"
+                            class="user-image img-circle elevation-2" alt="User Image">
+                        @if(Auth::user())
+
+                        <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
+                        @endif
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <!-- User image -->
+                        <li class="user-header bg-primary">
+                            <img src="gymManagers_images/{{$image}}"
+                                class="img-circle elevation-2" alt="User Image">
+                            <p>
+                                {{ Auth::user()->name }}
+                                <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
+                            </p>
+                        </li>
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                            <a href="#" class="btn btn-default btn-flat float-right"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Sign out
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            @endhasanyrole
         </nav>
 
         <!-- Left side column. contains the logo and sidebar -->

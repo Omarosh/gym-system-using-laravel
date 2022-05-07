@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@hasanyrole('city_manager|admin')
 
 <div class="container">
     <h2>Gym Managers Table</h2>
@@ -20,7 +21,10 @@
         </tbody>
     </table>
 </div>
+@hasanyrole('city_manager|admin')
 <a href="/create_gym_manager">Create Gym Manager</a>
+@endhasanyrole
+
 
 <script script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js">
 </script>
@@ -68,6 +72,7 @@
     });
 </script>
 
+@endhasanyrole
 
 @endsection
 @section('third_party_scripts')
@@ -78,4 +83,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js" defer></script>
 <script type="text/javascript"></script>
+
 @endsection

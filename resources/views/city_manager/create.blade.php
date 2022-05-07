@@ -1,18 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+@hasanyrole('admin')
+
 @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+
+
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 <h1>Create City Manager</h1>
-<!-- <form method='POST' action="{{ route('city_manager.store')  }}"> -->
-<form method='POST'  enctype="multipart/form-data" action="{{ route('city_manager.store')  }}">
+<form method='POST' enctype="multipart/form-data" action="{{ route('city_manager.store')  }}">
     @csrf
     <label for=" fname">Email :</label><br>
     <input type="text" id="email" name="email"><br><br>
@@ -28,7 +31,9 @@
 
     <input type="file" rows="3" id="exampleFormControlTextarea1" class="form-control" name="image" /><br><br>
     <input type="submit" value="Submit">
-    
+
 
 </form>
+@endhasanyrole
+
 @endsection

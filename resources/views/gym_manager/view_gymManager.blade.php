@@ -1,7 +1,9 @@
 
 @extends('layouts.app')
 
+
 @section('content')
+@hasanyrole('city_manager|admin')
 
 @if( $manager->image_path)
           <center><img src='/gymManagers_images/{{ $manager->image_path }}' width=300 /></center>
@@ -29,6 +31,7 @@
                 <label for="exampleFormControlTextarea1" class="form-control" id="exampleFormControlInput1" class="form-label">{{ $manager->national_id }}</label>
                 
             </div>
+            @endhasanyrole
 
             @endsection
            

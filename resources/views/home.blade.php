@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
 
-    <h1 class="text-black-50">You are logged in!</h1>
+    <h1 class="text-black-50">Welcome To The Best Gym System In The History</h1>
 
 </div>
 @endsection
