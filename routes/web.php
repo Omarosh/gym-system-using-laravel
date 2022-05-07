@@ -35,7 +35,6 @@ Route::middleware(['auth','banned'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::get('/gym_managers', [App\Http\Controllers\CityManagerController::class, 'index'])->name('gym_managers');
-    // Route::get('/gym_managers/list', [App\Http\Controllers\CityManagerController3::class, 'getCityManagers'])->name('gym_managers.list');
     
     // City Manager Routes
     Route::get('/city_managers', [App\Http\Controllers\CityManagerController::class, 'index'])->name('city_managers');
@@ -44,21 +43,12 @@ Route::middleware(['auth','banned'])->group(function () {
     Route::put('/city_manager/{city_manager}', [App\Http\Controllers\CityManagerController::class, 'update'])->name('city_manager.update');
     Route::post('/city_manager/store', [App\Http\Controllers\CityManagerController::class, 'store'])->name('city_manager.store');
     Route::get('/create_city_manager', [App\Http\Controllers\CityManagerController::class, 'create'])->name('city_managers.create');
-    
     Route::post('/city_manager/view/{city_manager}/', [App\Http\Controllers\CityManagerController::class, 'view'])->name('city_manager.view');
-    
-    
-    
-    // Packages Routes
-    // Route::get('/create_package', [App\Http\Controllers\TrainingPackagesController::class, 'create'])->name('package.create');
-    // Route::post('/package/store', [App\Http\Controllers\TrainingPackagesController::class, 'store'])->name('package.store');
-    
-    
+        
     // Gym Routes
     Route::get('/create_gym', [App\Http\Controllers\GymController::class, 'create'])->name('gyms.create');
     Route::post('/gym/store', [App\Http\Controllers\GymController::class, 'store'])->name('gyms.store');
     Route::post('/gym/view/{gym}', [App\Http\Controllers\GymController::class, 'view'])->name('gyms.view');
-        
     Route::post('/city_manager/delete', [CityManagerController::class, 'destroy'])->name('city_manager.delete');
     
     // Gym Manager Routes
@@ -124,14 +114,17 @@ Route::middleware(['auth','banned'])->group(function () {
     Route::get('/stripe-payment', [StripeController::class, 'handleGet2'])->name('stripe-payment');
     Route::post('/stripe-payment', [StripeController::class, 'handlePost2'])->name('stripe.payment');
     
+    // Attendance Routes
     Route::get('/attendedtable', [App\Http\Controllers\Api\AttendedSessionController::class,'getAttendance'])->name('attendance.list');
     Route::get('/attendedview', [App\Http\Controllers\Api\AttendedSessionController::class,'view'])->name('attendance');
 });
 
 
-
+// Banned Gym Manager Route
 Route::get('/bannedGymManager', function () {
     return view('bannedGymManager');
 })->name('bannedGymManager');
 
+
+// Auth Routes
 Auth::routes(['register'=>false]);
