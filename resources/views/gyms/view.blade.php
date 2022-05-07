@@ -63,7 +63,6 @@
 
                "data": 'username',
                'name': 'user.name'
-               //'name': 'cityMangerName'
 
 
             },

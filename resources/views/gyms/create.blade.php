@@ -4,7 +4,6 @@
 @hasanyrole('city_manager|admin')
 
 <h1>Create Gym </h1>
-<!-- <form method='POST' action="{{ route('city_manager.store')  }}"> -->
 <form method='POST' enctype="multipart/form-data" action="{{ route('gyms.store')  }}">
     @csrf
     <label for=" fname">Name :</label><br>

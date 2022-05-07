@@ -15,7 +15,6 @@
 </div>
 @endif
 <h1>Create City Manager</h1>
-<!-- <form method='POST' action="{{ route('city_manager.store')  }}"> -->
 <form method='POST' enctype="multipart/form-data" action="{{ route('city_manager.store')  }}">
     @csrf
     <label for=" fname">Email :</label><br>
