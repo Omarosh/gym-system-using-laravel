@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\TrainingSessionController;
 use App\Http\Controllers\Api\AttendedSessionController;
 use App\Models\Trainee;
 use App\Models\TrainingPackage;
+use App\Notifications\verifiedTrainee;
 use Illuminate\Support\Facades\Hash;
 
 /*
@@ -47,20 +48,20 @@ Route::post('/', [GymController::class,'update'])->name("citymanger.store");
 
 Route::post('/payment', [StripeController::class, 'handlePost'])->name('stripe.payment');
 
-Route::post('/signup', [TraineeController::class,'store']);
-Route::post('/sanctum/token', [TraineeController::class,'login']);
-Route::post('/edit', [TraineeController::class,'update'])->middleware('auth:sanctum');
+Route::post('/signup',[TraineeController::class,'store']);
+Route::post('/trainee/login',[TraineeController::class,'login']); 
+Route::post('/edit',[TraineeController::class,'update'])->middleware('auth:sanctum');
 
 Auth::routes(['verify' => true]);
 
-//code to verify the email
+//code to verify the email //this is okayyyyyyyyyyyyyyyyyyyyyyy
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
-    
-    return redirect('/home');
-})->middleware(['auth'])->name('verification.verify');
+    $trainee = Trainee::find(explode("/",$request->url())[6])->first();
+    $trainee->notify(new verifiedTrainee()); 
+})->middleware(['auth:sanctum'])->name('verification.verify');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/training_packages', [TrainingPackageController::class,'store']);
     Route::get('/trainees/{trainee}', [TraineeController::class,'show']);
     Route::post('/training_sessions', [TrainingSessionController::class,'store']);

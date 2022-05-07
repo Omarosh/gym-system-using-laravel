@@ -54,9 +54,9 @@ class TraineeController extends Controller
             $request['passwd'] = Hash::make($request['passwd']);
             $trainee = Trainee::create($request->all());
             event(new Registered($trainee));
-            $trainee->notify(new verifiedTrainee());   //send greeting notification this is needed to be done after verification
-        } else {
-            return "password and password_confirmation are not identical";
+        }
+        else {
+            return "password and password_confirmation are not identical"; 
         }
     }
 
@@ -81,6 +81,8 @@ class TraineeController extends Controller
 
         $token = $user->createToken($request->device_name)->plainTextToken;
         return ["user info"=> new TraineeResource($user),"token"=>$token];
+       
+       
     }
 
     /**
