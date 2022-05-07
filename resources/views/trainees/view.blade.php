@@ -12,6 +12,7 @@
                 <th>Gender</th>
                 <th>Date of Birth</th>
                 <th>Email</th>
+                <th>Remaining Sessions</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -50,6 +51,10 @@
                 {
                     "data": "email",
                     "name": "email"
+                },
+                {
+                    "data": "remaining_session",
+                    "name": "remaining_session"
                 },
                 {
                     data: 'action',

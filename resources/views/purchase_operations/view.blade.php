@@ -1,23 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
-
-<div class="container">
-    <h2>Purchase Operations</h2>
-    <!-- <div class="info-box">
-        <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
-        <div class="info-box-content">
-            <span class="info-box-text">the total revenue of my gym</span>
-            <span class="info-box-number"></span>
+    @if($gym!=="nope")
+        <div class="container">
+        <h2>Purchase Operations</h2>
+        <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">the total revenue of my gym</span>
+                <span class="info-box-number">{{$gym}}</span>
+                <span class="info-box-number"></span>
+            </div>
         </div>
-    </div> -->
-    <div class="info-box">
+    @endif
+    @if($city!=="nope")
+     <div class="info-box">
         <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
         <div class="info-box-content">
             <span class="info-box-text">the total revenue of my city</span>
             <span class="info-box-number">{{$city}}</span>
         </div>
     </div>
+    @endif
     @if(Session::has("success"))
 <div class="container my-5">
     <div class="row my-5">

@@ -4,7 +4,17 @@
 
 <div class="container">
    <h2>Laravel DataTables Tutorial Example</h2>
-   <table class="table table-bordered" id="datatable">
+   @if(Session::has("message"))
+      <div class=" my-5">
+         <div class="row my-5">
+            <div style="width: fit-content; left: 45%; position: absolute; opacity: 0.75;" class="bg bg-info my-3 py-2 px-3 bg-opacity-50">
+                  <p>{{Session::get("message")}}</p>
+            </div>
+         </div>
+      </div>
+      <div style="height: 60px;" class="row"></div>
+   @endif
+   <table class="table table-bordered mt-5" id="datatable">
       <thead>
          <tr>
             <th>ID</th>

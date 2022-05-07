@@ -1,12 +1,10 @@
-
 <?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -15,9 +13,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('trainees', function (Blueprint $table) {
-            $table->unsignedBigInteger('training_package_id')->nullable();
-            $table->foreign('training_package_id')->references('id')->on('training_packages');
-
+            $table->integer('remaining_session')->default(0);
         });
     }
 
@@ -29,7 +25,6 @@ return new class extends Migration
     public function down()
     {
         Schema::table('trainees', function (Blueprint $table) {
-            //
         });
     }
 };

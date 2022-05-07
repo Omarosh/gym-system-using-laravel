@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AttendedSessionController;
 use App\Http\Controllers\CityManagerController;
 use App\Http\Controllers\Auth\cityManagerRegisterController;
 use Illuminate\Support\Facades\Route;
@@ -117,6 +118,8 @@ Route::middleware(['auth','banned'])->group(function () {
     // Attendance Routes
     Route::get('/attendedtable', [App\Http\Controllers\Api\AttendedSessionController::class,'getAttendance'])->name('attendance.list');
     Route::get('/attendedview', [App\Http\Controllers\Api\AttendedSessionController::class,'view'])->name('attendance');
+    Route::get('/create_attendance', [App\Http\Controllers\Api\AttendedSessionController::class,'create']);
+    Route::post('/attended_sessions', [AttendedSessionController::class,'storeGUI'])->name('gui.attended_sessions');
 });
 
 
