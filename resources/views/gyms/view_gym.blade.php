@@ -1,4 +1,4 @@
-center@extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
 @hasanyrole('city_manager|admin')

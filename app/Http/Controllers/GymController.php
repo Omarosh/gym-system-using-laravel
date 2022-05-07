@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\CityManger;
+use App\Models\User;
+
 use App\Models\Coach;
 use Illuminate\Http\Request;
 use App\Models\Gym;
@@ -20,7 +22,7 @@ class GymController extends Controller
             array_push($cities, [$k["id"] , $k["city_name"]]);
         }
         
-        return view('gyms.create',['cities' => $cities]);
+        return view('gyms.create', ['cities' => $cities]);
     }
     
     public function store(Request $request)
@@ -110,6 +112,10 @@ class GymController extends Controller
             })
             ->addColumn('cityName', function ($gym) {
                 return $gym->city_name;
+            })
+            ->addColumn('username', function ($gym) {
+                $cityManagerId=CityManger::where('city_name', $gym->city_name)->first();
+                return $cityManagerId->user->name;
             })
             ->addColumn('action', function ($row) {
                 return view('gyms.edit_delete_buttons', compact('row'))->render();

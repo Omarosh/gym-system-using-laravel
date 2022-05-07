@@ -14,6 +14,12 @@
             <th>Created at</th>
             <th>cover_image</th>
             <th>City Name</th>
+            @hasanyrole('admin')
+
+            <th>City Manager Name</th>
+            @endhasanyrole
+
+
             <th>Actions</th>
          </tr>
       </thead>
@@ -28,6 +34,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js" defer></script>
 <script type="text/javascript"></script>
+@hasanyrole('admin')
+
 <script>
    $(document).ready(function() {
       $('#datatable').DataTable({
@@ -50,6 +58,16 @@
             {
                "data": "city_name",
             },
+
+            {
+
+               "data": 'username',
+               'name': 'user.name'
+               //'name': 'cityMangerName'
+
+
+            },
+
             {
                "data": 'action',
                "name": 'action',
@@ -60,6 +78,48 @@
       });
    });
 </script>
+@endhasanyrole
+
+{{-- stRT cp --}}
+@hasanyrole('gym_manager|city_manager')
+
+<script>
+   $(document).ready(function() {
+      $('#datatable').DataTable({
+         "processing": true,
+         "serverSide": true,
+         "ajax": "{{ route('gyms.list') }}",
+         "columns": [{
+               "data": "id"
+            },
+            {
+               "data": "name"
+            },
+            {
+               "data": "created_at",
+               "name": "created_at"
+            },
+            {
+               "data": "cover_image_path"
+            },
+            {
+               "data": "city_name",
+            },
+
+
+
+            {
+               "data": 'action',
+               "name": 'action',
+               'searchable': true,
+               'orderable': true,
+            }
+         ]
+      });
+   });
+</script>
+@endhasanyrole
+{{-- ENDcp --}}
 <a href="{{route('gyms.create')}}">Create Gym</a>
 @endhasanyrole
 
